@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bezpieczeństwo AI</title>
+  <title>AI: Bezpieczna czy nie?</title>
   <style>
     :root {
       --bg-color: #0f0f0f;
@@ -11,31 +11,54 @@
       --accent: #00ffaa;
       --card-bg: #1a1a1a;
     }
+
     body.light {
       --bg-color: #f0f0f0;
       --text-color: #111;
       --accent: #007777;
       --card-bg: #ffffff;
     }
+
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       transition: all 0.3s ease;
+      animation: fadeIn 1s ease-out;
     }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
     header {
       text-align: center;
       padding: 30px;
+      animation: slideDown 1s ease-in-out;
     }
+
+    @keyframes slideDown {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
     h1 {
       font-size: 3em;
       color: var(--accent);
+      transition: transform 0.5s ease;
     }
+
+    h1:hover {
+      transform: scale(1.1);
+    }
+
     nav {
       text-align: center;
       margin-bottom: 20px;
     }
+
     nav a {
       color: var(--accent);
       margin: 10px;
@@ -46,15 +69,24 @@
       border-radius: 10px;
       transition: 0.3s;
     }
+
     nav a:hover {
       background-color: var(--accent);
       color: var(--bg-color);
     }
+
     .container {
       max-width: 900px;
       margin: auto;
       padding: 20px;
+      animation: slideUp 1s ease-in-out;
     }
+
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
     .card {
       background-color: var(--card-bg);
       padding: 20px;
@@ -62,11 +94,14 @@
       border-radius: 10px;
       margin-bottom: 20px;
       box-shadow: 0 0 10px #0003;
+      transition: transform 0.3s ease;
       cursor: pointer;
     }
+
     .card:hover {
-      transform: scale(1.02);
+      transform: scale(1.05);
     }
+
     button {
       background-color: var(--accent);
       color: var(--bg-color);
@@ -75,16 +110,26 @@
       border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
-      margin: 5px;
+      margin: 10px;
+      transition: background-color 0.3s;
     }
+
+    button:hover {
+      background-color: #ffaa00;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
       color: gray;
     }
+
     .fullscreen-modal {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background-color: rgba(0, 0, 0, 0.9);
       z-index: 9999;
       display: none;
@@ -92,16 +137,18 @@
       align-items: center;
       padding: 20px;
     }
+
     .fullscreen-modal.active {
       display: flex;
     }
+
     .modal-content {
       background-color: white;
-      color: black;
       padding: 30px;
       border-radius: 10px;
       max-width: 80%;
       overflow: auto;
+      max-height: 80%;
     }
   </style>
 </head>
@@ -109,8 +156,8 @@
   <header>
     <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
     <button onclick="toggleMode()">Tryb Jasny/Ciemny</button>
-    <button onclick="speak()">Inwokacja: Pan Tadeusz</button>
-    <button onclick="stopSpeech()">Zatrzymaj Inwokację</button>
+    <button onclick="startInwokacja()">Inwokacja: Pan Tadeusz</button>
+    <button onclick="stopInwokacja()">Zatrzymaj Inwokację</button>
   </header>
 
   <nav>
@@ -120,22 +167,21 @@
   </nav>
 
   <div class="container">
-    <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'Sztuczna inteligencja to narzędzie, które w przyszłości może mieć ogromny wpływ na nasze życie. Jeżeli nie zostanie odpowiednio kontrolowana, może stać się zagrożeniem. Bezpieczeństwo AI nie jest tylko kwestią ochrony przed złośliwym użyciem technologii, ale także zapewnienia, że nie podejmie decyzji szkodliwych dla społeczeństwa.')">
+    <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'Sztuczna inteligencja może podejmować decyzje wpływające na miliony ludzi. Jeśli nie będzie nadzorowana i projektowana odpowiedzialnie, może prowadzić do problemów etycznych, społecznych i technologicznych.')">
       <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
     </div>
-    <div class="card" onclick="openModal('Zastosowania AI w codziennym życiu', 'Od rekomendacji na YouTube po diagnostykę medyczną, AI jest coraz bardziej obecna. Ale z wielką mocą przychodzi wielka odpowiedzialność – musimy nadzorować jej rozwój.')">
-      <h3>⚙️ Zastosowania AI w codziennym życiu</h3>
-    </div>
-    <div class="card" onclick="openModal('Zagrożenia związane z AI', 'AI może zostać wykorzystana do manipulacji, nadzoru, automatyzacji broni i wielu innych niebezpiecznych celów. To wymaga regulacji i etycznych standardów.')">
+    <div class="card" onclick="openModal('Zagrożenia związane z AI', 'Nieodpowiednio nadzorowane AI może być wykorzystane do manipulacji informacją, automatyzacji broni lub masowego śledzenia.')">
       <h3>⚠️ Zagrożenia związane z AI</h3>
+    </div>
+    <div class="card" onclick="openModal('Jak można uczynić AI bezpieczną?', 'Potrzebne są odpowiednie regulacje, przejrzystość algorytmów, testowanie i zaangażowanie społeczności naukowej w rozwój technologii.')">
+      <h3>✅ Jak uczynić AI bezpieczną?</h3>
     </div>
   </div>
 
   <footer>
-    &copy; 2025 Piotr – edukacja z pier***nięciem (bez przekleństw, ale z mocą!)
+    &copy; 2025 Piotr i jego superstrona z Notatnika.
   </footer>
 
-  <!-- Audio + Modal -->
   <audio id="clickSound" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto"></audio>
 
   <div id="fullscreenModal" class="fullscreen-modal">
@@ -147,34 +193,12 @@
   </div>
 
   <script>
-    let speechInstance;
-
     function toggleMode() {
       document.body.classList.toggle("light");
     }
 
     function playClick() {
       document.getElementById("clickSound").play();
-    }
-
-    function speak() {
-      stopSpeech();
-      const text = `Litwo! Ojczyzno moja! ty jesteś jak zdrowie;
-Ile cię trzeba cenić, ten tylko się dowie,
-Kto cię stracił. Dziś piękność twą w całej ozdobie
-Widzę i opisuję, bo tęsknię po tobie.
-Panno Święta, co Jasnej bronisz Częstochowy
-I w Ostrej świecisz Bramie! Ty, co gród zamkowy
-Nowogródzki ochraniasz z jego wiernym ludem!`;
-
-      speechInstance = new SpeechSynthesisUtterance(text);
-      window.speechSynthesis.speak(speechInstance);
-    }
-
-    function stopSpeech() {
-      if (speechInstance) {
-        window.speechSynthesis.cancel();
-      }
     }
 
     function openModal(title, content) {
@@ -186,6 +210,28 @@ Nowogródzki ochraniasz z jego wiernym ludem!`;
 
     function closeModal() {
       document.getElementById("fullscreenModal").classList.remove("active");
+    }
+
+    let inwokacja;
+
+    function startInwokacja() {
+      stopInwokacja();
+      const tekst = `Litwo! Ojczyzno moja! ty jesteś jak zdrowie;
+Ile cię trzeba cenić, ten tylko się dowie,
+Kto cię stracił. Dziś piękność twą w całej ozdobie
+Widzę i opisuję, bo tęsknię po tobie.
+Panno Święta, co Jasnej bronisz Częstochowy
+I w Ostrej świecisz Bramie! Ty, co gród zamkowy
+Nowogródzki ochraniasz z jego wiernym ludem!`;
+
+      inwokacja = new SpeechSynthesisUtterance(tekst);
+      window.speechSynthesis.speak(inwokacja);
+    }
+
+    function stopInwokacja() {
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+      }
     }
   </script>
 </body>
