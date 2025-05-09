@@ -1,180 +1,226 @@
-<!DOCTYPE html><html lang="pl">
+<!DOCTYPE html>
+<html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bezpieczeństwo AI</title>
-  <style>
-    :root {
-      --bg-color: #0f0f0f;
-      --text-color: #ffffff;
-      --accent-color: #00ffaa;
-      --card-bg: #1a1a1a;
-    }body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI: Bezpieczna czy nie?</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --text-color: #fff;
+            --accent: #00ffaa;
+            --card-bg: #1a1a1a;
+        }
 
-header {
-  text-align: center;
-  padding: 2rem;
-  background-color: #111;
-  animation: slideDown 1s ease-out;
-}
+        body.light {
+            --bg-color: #f0f0f0;
+            --text-color: #111;
+            --accent: #007777;
+            --card-bg: #ffffff;
+        }
 
-@keyframes slideDown {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-out;
+        }
 
-h1 {
-  color: var(--accent-color);
-  font-size: 2.8rem;
-}
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
 
-button {
-  margin: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  background-color: var(--accent-color);
-  color: var(--bg-color);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
+        header {
+            text-align: center;
+            padding: 30px;
+            animation: slideDown 1s ease-in-out;
+        }
 
-button:hover {
-  background-color: #ffaa00;
-}
+        @keyframes slideDown {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
 
-.container {
-  max-width: 960px;
-  margin: auto;
-  padding: 1rem;
-}
+        h1 {
+            font-size: 3em;
+            color: var(--accent);
+            transition: transform 0.5s ease;
+        }
 
-.card {
-  background-color: var(--card-bg);
-  border-left: 5px solid var(--accent-color);
-  padding: 1rem;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: transform 0.3s;
-}
+        h1:hover {
+            transform: scale(1.1);
+        }
 
-.card:hover {
-  transform: scale(1.03);
-}
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: gray;
-}
+        nav a {
+            color: var(--accent);
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            transition: 0.3s;
+        }
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
+        nav a:hover {
+            background-color: var(--accent);
+            color: var(--bg-color);
+        }
 
-.modal.active {
-  display: flex;
-}
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            animation: slideUp 1s ease-in-out;
+        }
 
-.modal-content {
-  background-color: #fff;
-  color: #000;
-  padding: 2rem;
-  max-width: 80%;
-  border-radius: 10px;
-  overflow-y: auto;
-  max-height: 80%;
-}
+        @keyframes slideUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
 
-.close-btn {
-  margin-top: 1rem;
-  background-color: #000;
-  color: #fff;
-}
+        .card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-left: 5px solid var(--accent);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px #0003;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
 
-  </style>
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        button {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffaa00;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: gray;
+        }
+
+        /* Fullscreen modal */
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .fullscreen-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 80%;
+            overflow: auto;
+        }
+
+        .modal-content h3 {
+            color: var(--accent);
+        }
+
+        .modal-content p {
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        /* Adding transitions for smoother fullscreen modal effect */
+        .modal-content, .fullscreen-modal {
+            transition: all 0.5s ease-in-out;
+        }
+
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
-    <button onclick="toggleMode()">Przełącz tryb</button>
-    <button onclick="speak()">Panie Ludwiku + Inwokacja</button>
-  </header>  <div class="container">
-    <div class="card" onclick="openModal('Zagrożenia AI', 'AI może stanowić zagrożenie, gdy nie jest właściwie kontrolowana. Może podejmować błędne decyzje lub być użyta w nieetyczny sposób.')">
-      <h3>🔒 Zagrożenia AI</h3>
-      <p>Dlaczego kontrola AI jest istotna?</p>
-    </div><div class="card" onclick="openModal('Regulacje', 'Aby zapewnić bezpieczeństwo AI, potrzebne są globalne regulacje i zasady etyczne. Takie ramy mogą pomóc w zapobieganiu niepożądanym konsekwencjom.')">
-  <h3>⚖️ Regulacje</h3>
-  <p>Tworzenie ram prawnych dla sztucznej inteligencji.</p>
-</div>
 
-<div class="card" onclick="openModal('Korzyści i ryzyko', 'AI niesie ogromne korzyści, ale również ryzyko. Równowaga między innowacją a bezpieczeństwem musi być zachowana.')">
-  <h3>⚖️ Korzyści i ryzyko</h3>
-  <p>Balans między innowacją a odpowiedzialnością.</p>
-</div>
+    <header>
+        <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
+        <button onclick="toggleMode()">Przełącz Tryb Jasny/Ciemny</button>
+        <button onclick="speak()">Panie Ludwiku, nie wiedziałem, co wpisać (i dalej inwokacja)</button>
+    </header>
 
-  </div>  <div class="modal" id="modal">
-    <div class="modal-content">
-      <h2 id="modalTitle"></h2>
-      <p id="modalText"></p>
-      <button class="close-btn" onclick="closeModal()">Zamknij</button>
+    <nav>
+        <a href="https://openai.com/safety" target="_blank" onclick="playClick()">OpenAI Safety</a>
+        <a href="https://futureoflife.org" target="_blank" onclick="playClick()">Future of Life</a>
+        <a href="https://alignmentforum.org" target="_blank" onclick="playClick()">AI Alignment</a>
+    </nav>
+
+    <div class="container">
+        <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'Sztuczna inteligencja to narzędzie, które w przyszłości może mieć ogromny wpływ na nasze życie. Od automatyzacji w pracy po podejmowanie decyzji w obszarze zdrowia, edukacji czy transportu. Jeżeli sztuczna inteligencja nie zostanie odpowiednio kontrolowana, może stać się zagrożeniem. Bezpieczeństwo AI nie jest tylko kwestią ochrony przed złośliwym użyciem technologii, ale także zapewnienia, że AI nie podejmie decyzji, które mogą zaszkodzić społeczeństwu. Musimy być gotowi, aby zarządzać tymi potężnymi narzędziami w sposób odpowiedzialny.')">
+            <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
+        </div>
+
+        <div class="card" onclick="openModal('Jakie są zagrożenia związane z AI?', 'Współczesne systemy AI mogą podejmować decyzje w obszarach, które mają ogromny wpływ na życie ludzkie. Zdarza się, że AI może podejmować błędne decyzje, ponieważ nie rozumie w pełni kontekstu. Inne zagrożenia to możliwość wykorzystania AI do celów złośliwych, takich jak manipulacja opinią publiczną czy ataki na systemy informacyjne.')">
+            <h3>⚠️ Jakie są zagrożenia związane z AI?</h3>
+        </div>
+
+        <div class="card" onclick="openModal('Jakie są rozwiązania i regulacje?', 'Aby zapobiec zagrożeniom wynikającym z rozwoju sztucznej inteligencji, wprowadzono różne regulacje prawne. Przykładem może być projekt AI Act w Unii Europejskiej, który ma na celu ustalenie norm dla rozwoju i wykorzystywania AI w różnych dziedzinach. Ważne jest również, aby rozwój AI był transparentny i etyczny, a jego stosowanie nadzorowane przez odpowiednie organy.')">
+            <h3>🛡️ Jakie są rozwiązania i regulacje?</h3>
+        </div>
+
+        <div class="card" onclick="openModal('AI a człowiek: jak współpracować?', 'Chociaż AI staje się coraz bardziej zaawansowane, człowiek nadal odgrywa kluczową rolę w rozwoju i nadzorze nad tymi technologiami. Współpraca między człowiekiem a maszyną może prowadzić do ogromnych korzyści, takich jak poprawa jakości życia, rozwój medycyny czy efektywność w pracy. Kluczem jest odpowiedzialne zarządzanie i zrozumienie, jak AI może wspierać, a nie zastępować człowieka.')">
+            <h3>👨‍💻 AI a człowiek: jak współpracować?</h3>
+        </div>
+
     </div>
-  </div>  <footer>
-    &copy; 2025 Piotr | Strona edukacyjna o AI
-  </footer><audio id="clickSound" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto"></audio>
 
-  <script>
-    function toggleMode() {
-      document.body.classList.toggle('light');
-    }
+    <footer>
+        &copy; 2025 Piotr i jego superstrona z Notatnika. Sztuczna, ale szczera.
+    </footer>
 
-    function playClick() {
-      const click = document.getElementById("clickSound");
-      click.currentTime = 0;
-      click.play();
-    }
+    <!-- Audio & JS -->
+    <audio id="clickSound" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto"></audio>
+    
+    <!-- Fullscreen Modal -->
+    <div id="fullscreenModal" class="fullscreen-modal">
+        <div class="modal-content">
+            <h3 id="modalTitle"></h3>
+            <p id="modalContent"></p>
+            <button onclick="closeModal()">Zamknij</button>
+        </div>
+    </div>
 
-    function speak() {
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.lang = 'pl-PL';
-      utterance.text = "Panie Ludwiku, nie wiedziałem co wpisać, więc oddaję głos Mickiewiczowi: \nLitwo! Ojczyzno moja! ty jesteś jak zdrowie. Ile cię trzeba cenić, ten tylko się dowie, kto cię stracił. Dziś piękność twą w całej ozdobie widzę i opisuję, bo tęsknię po tobie.";
-      window.speechSynthesis.speak(utterance);
-    }
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle("light");
+        }
 
-    function openModal(title, text) {
-      playClick();
-      document.getElementById("modalTitle").innerText = title;
-      document.getElementById("modalText").innerText = text;
-      document.getElementById("modal").classList.add("active");
-    }
-
-    function closeModal() {
-      document.getElementById("modal").classList.remove("active");
-    }
-  </script></body>
-</html>
+        function playClick() {
+            document.getElementById("clickSound").play();
+        }
