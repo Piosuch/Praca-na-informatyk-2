@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI: Bezpieczna czy nie?</title>
     <style>
         :root {
-            --bg-color: #0f0f0f;
+            --bg-color: #006f6a; /* Morski kolor tła */
             --text-color: #fff;
-            --accent: #00ffaa;
-            --card-bg: #1a1a1a;
+            --accent: #00bfae; /* Morski akcent */
+            --card-bg: #004c47; /* Morski kolor dla kart */
         }
 
         body.light {
@@ -95,25 +95,10 @@
             margin-bottom: 20px;
             box-shadow: 0 0 10px #0003;
             transition: transform 0.3s ease;
-            cursor: pointer;
         }
 
         .card:hover {
             transform: scale(1.05);
-        }
-
-        .fullscreen-card {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            z-index: 9999;
-            overflow: auto;
-            background: var(--bg-color);
-            color: var(--text-color);
-            padding: 40px;
-            box-shadow: 0 0 20px #000;
         }
 
         button {
@@ -144,7 +129,7 @@
     <header>
         <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
         <button onclick="toggleMode()">Przełącz Tryb Jasny/Ciemny</button>
-        <button onclick="speak()">Panie Ludwiku, nie wiedziałem, co wpisać</button>
+        <button onclick="speak()">Panie Ludwiku, nie wiedziałem, co wpisać (i dalej inwokacja)</button>
     </header>
 
     <nav>
@@ -154,83 +139,51 @@
     </nav>
 
     <div class="container">
-        <!-- Wszystkie karty -->
-        <div class="card">
+        <div class="card" onclick="playRandomSound()">
             <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
-            <p>Sztuczna inteligencja to narzędzie, które w przyszłości może mieć ogromny wpływ na nasze życie...</p>
+            <p>Sztuczna inteligencja to narzędzie, które w przyszłości może mieć ogromny wpływ na nasze życie. Od automatyzacji w pracy po podejmowanie decyzji w obszarze zdrowia, edukacji czy transportu. Jeżeli sztuczna inteligencja nie zostanie odpowiednio kontrolowana, może stać się zagrożeniem. Bezpieczeństwo AI nie jest tylko kwestią ochrony przed złośliwym użyciem technologii, ale także zapewnienia, że AI nie podejmie decyzji, które mogą zaszkodzić społeczeństwu. Musimy być gotowi, aby zarządzać tymi potężnymi narzędziami w sposób odpowiedzialny.</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="playRandomSound()">
             <h3>🎭 Deepfake: Złudzenie rzeczywistości</h3>
-            <p>AI potrafi tworzyć coraz bardziej realistyczne deepfake'i – fałszywe wideo, zdjęcia czy nagrania głosowe...</p>
+            <p>AI potrafi tworzyć coraz bardziej realistyczne deepfake'i – fałszywe wideo, zdjęcia czy nagrania głosowe. W rękach przestępców, technologia ta może zostać wykorzystana do manipulacji opinią publiczną, niszczenia reputacji, a nawet wyłudzeń finansowych. Konieczne jest opracowanie narzędzi, które będą w stanie zidentyfikować tego typu fałszywki, zanim będą mogły wyrządzić szkody.</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="playRandomSound()">
             <h3>💣 AI w cyberatakach: Niebezpieczne w rękach złoczyńców</h3>
-            <p>Przestępcy już teraz uczą AI jak przeprowadzać cyberataki...</p>
+            <p>Przestępcy już teraz uczą AI jak przeprowadzać cyberataki. Dzięki zastosowaniu sztucznej inteligencji, cyberprzestępcy mogą automatycznie znajdować i wykorzystywać słabe punkty w systemach, co sprawia, że stają się znacznie bardziej efektywni. Z kolei obrona przed takimi atakami wymaga ciągłej adaptacji i rozwoju technologii ochrony.</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="playRandomSound()">
             <h3>🤖 Autonomiczne decyzje: Kto będzie odpowiedzialny?</h3>
-            <p>Jakość podejmowanych przez AI decyzji zależy od danych...</p>
+            <p>Jakość podejmowanych przez AI decyzji zależy od danych, na których się opiera. Często te decyzje mogą dotyczyć krytycznych obszarów, jak medycyna czy prawo. Pytanie brzmi: kto będzie odpowiedzialny, jeśli sztuczna inteligencja podejmie złą decyzję? Odpowiedź nie jest prosta, ponieważ odpowiedzialność za działania AI wymaga nowego podejścia prawnego i etycznego.</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="playRandomSound()">
             <h3>🚀 Przyszłość AI: Jak AI może zmienić świat?</h3>
-            <p>Sztuczna inteligencja ma potencjał, by zrewolucjonizować każdą branżę...</p>
+            <p>Sztuczna inteligencja ma potencjał, by zrewolucjonizować każdą branżę. Możliwości są ogromne, ale w miarę jak stajemy się bardziej zależni od AI, powinniśmy pamiętać o ryzykach. Jakie będą konsekwencje, jeśli AI będzie podejmować decyzje bez naszej ingerencji? Kiedy AI stanie się autonomiczne, pojawią się pytania o etykę, prywatność i kontrolę.</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="playRandomSound()">
             <h3>🔍 Przypadki użycia AI: Gdzie już teraz korzystamy?</h3>
-            <p>AI jest wykorzystywane w wielu branżach...</p>
+            <p>AI jest wykorzystywane w wielu branżach, począwszy od medycyny, przez przemysł, aż po edukację. Zastosowania AI w diagnostyce medycznej, zarządzaniu danymi, automatyzacji procesów produkcyjnych czy przewidywaniu trendów finansowych zmieniają oblicze wielu zawodów. Z jednej strony, AI może zwiększyć efektywność i zaoszczędzić czas, z drugiej zaś może zagrażać niektórym miejscom pracy.</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="playRandomSound()">
             <h3>📉 Zagrożenia związane z AI: Manipulacja, prywatność i inne</h3>
-            <p>Choć AI ma wiele pozytywnych zastosowań, niesie również ze sobą ryzyko...</p>
+            <p>Choć AI ma wiele pozytywnych zastosowań, niesie również ze sobą ryzyko. Przykłady to: inwigilacja, zbieranie ogromnych ilości danych o użytkownikach, przejęcie kontroli nad systemami krytycznymi. Również istnieje zagrożenie w postaci autonomicznych robotów bojowych, które mogą zostać wykorzystane w konfliktach zbrojnych. W związku z tym, potrzebujemy globalnych regulacji, które zapobiegną niekontrolowanemu rozwojowi tej technologii.</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="playRandomSound()">
             <h3>🛡️ Etyczne wyzwania: Co robić z AI?</h3>
-            <p>Jak zapewnić, by AI działało zgodnie z wartościami i normami społecznymi...</p>
+            <p>Jak zapewnić, by AI działało zgodnie z wartościami i normami społecznymi? Jak zapobiec temu, by AI nie były wykorzystywane do nieetycznych celów? Odpowiedzi na te pytania zależą od rozwoju nowych systemów zabezpieczeń i etyki w tworzeniu sztucznej inteligencji. To nie tylko kwestia technologii, ale także filozofii, prawa i regulacji.</p>
         </div>
+
     </div>
 
     <footer>
         &copy; 2025 Piotr i jego superstrona z Notatnika. Sztuczna, ale szczera.
     </footer>
 
-    <!-- Śmieszny dźwięk -->
-    <audio id="clickSound" src="https://www.myinstants.com/media/sounds/vine-boom.mp3" preload="auto"></audio>
-
-    <script>
-        function toggleMode() {
-            document.body.classList.toggle("light");
-        }
-
-        function playClick() {
-            const clickSound = document.getElementById("clickSound");
-            if (clickSound) clickSound.play();
-        }
-
-        function speak() {
-            const speech = new SpeechSynthesisUtterance();
-            speech.text = "Panie Ludwiku, nie wiedziałem, co wpisać, więc oto moje słowa, które wznoszą się ku Wam jak wiatry wielkich idei!";
-            window.speechSynthesis.speak(speech);
-        }
-
-        // Klikanie kart z efektem i dźwiękiem
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', () => {
-                playClick();
-                const clone = card.cloneNode(true);
-                clone.classList.add('fullscreen-card');
-                document.body.appendChild(clone);
-                clone.addEventListener('click', () => {
-                    clone.remove();
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+    <!-- Audio & JS -->
+    <audio id="clickSound
