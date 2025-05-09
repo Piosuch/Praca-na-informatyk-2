@@ -1,210 +1,180 @@
-<!DOCTYPE html>
-<html lang="pl">
+<!DOCTYPE html><html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bezpieczeństwo Sztucznej Inteligencji</title>
-    <style>
-        :root {
-            --bg-color: #0f0f0f;  /* Czarne tło */
-            --text-color: #fff;    /* Biały tekst */
-            --accent: #00bfae;     /* Morski akcent */
-            --card-bg: #1a1a1a;    /* Ciemne tło kart */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bezpieczeństwo AI</title>
+  <style>
+    :root {
+      --bg-color: #0f0f0f;
+      --text-color: #ffffff;
+      --accent-color: #00ffaa;
+      --card-bg: #1a1a1a;
+    }body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
 
-        body.light {
-            --bg-color: #f0f0f0;
-            --text-color: #111;
-            --accent: #007777;
-            --card-bg: #ffffff;
-        }
+header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #111;
+  animation: slideDown 1s ease-out;
+}
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            transition: all 0.3s ease;
-            animation: fadeIn 1s ease-out;
-        }
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
+h1 {
+  color: var(--accent-color);
+  font-size: 2.8rem;
+}
 
-        header {
-            text-align: center;
-            padding: 30px;
-            animation: slideDown 1s ease-in-out;
-        }
+button {
+  margin: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
 
-        @keyframes slideDown {
-            0% { transform: translateY(-50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
+button:hover {
+  background-color: #ffaa00;
+}
 
-        h1 {
-            font-size: 3em;
-            color: var(--accent);
-            transition: transform 0.5s ease;
-        }
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 1rem;
+}
 
-        h1:hover {
-            transform: scale(1.1);
-        }
+.card {
+  background-color: var(--card-bg);
+  border-left: 5px solid var(--accent-color);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
 
-        nav {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.card:hover {
+  transform: scale(1.03);
+}
 
-        nav a {
-            color: var(--accent);
-            margin: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 12px;
-            border: 2px solid var(--accent);
-            border-radius: 10px;
-            transition: 0.3s;
-        }
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: gray;
+}
 
-        nav a:hover {
-            background-color: var(--accent);
-            color: var(--bg-color);
-        }
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            animation: slideUp 1s ease-in-out;
-        }
+.modal.active {
+  display: flex;
+}
 
-        @keyframes slideUp {
-            0% { transform: translateY(50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
+.modal-content {
+  background-color: #fff;
+  color: #000;
+  padding: 2rem;
+  max-width: 80%;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 80%;
+}
 
-        .card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-left: 5px solid var(--accent);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px #0003;
-            transition: transform 0.3s ease;
-        }
+.close-btn {
+  margin-top: 1rem;
+  background-color: #000;
+  color: #fff;
+}
 
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        button {
-            background-color: var(--accent);
-            color: var(--bg-color);
-            border: none;
-            padding: 10px 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            margin: 10px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #ffaa00;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: gray;
-        }
-
-        /* Nowe style dla kategorii */
-        .card h3 {
-            font-size: 1.8em;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            font-size: 1.1em;
-        }
-
-    </style>
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
+    <button onclick="toggleMode()">Przełącz tryb</button>
+    <button onclick="speak()">Panie Ludwiku + Inwokacja</button>
+  </header>  <div class="container">
+    <div class="card" onclick="openModal('Zagrożenia AI', 'AI może stanowić zagrożenie, gdy nie jest właściwie kontrolowana. Może podejmować błędne decyzje lub być użyta w nieetyczny sposób.')">
+      <h3>🔒 Zagrożenia AI</h3>
+      <p>Dlaczego kontrola AI jest istotna?</p>
+    </div><div class="card" onclick="openModal('Regulacje', 'Aby zapewnić bezpieczeństwo AI, potrzebne są globalne regulacje i zasady etyczne. Takie ramy mogą pomóc w zapobieganiu niepożądanym konsekwencjom.')">
+  <h3>⚖️ Regulacje</h3>
+  <p>Tworzenie ram prawnych dla sztucznej inteligencji.</p>
+</div>
 
-    <header>
-        <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
-        <button onclick="toggleMode()">Przełącz Tryb Jasny/Ciemny</button>
-        <button onclick="speak()">Panie Ludwiku, nie wiedziałem, co wpisać, więc oto moje słowa...</button>
-    </header>
+<div class="card" onclick="openModal('Korzyści i ryzyko', 'AI niesie ogromne korzyści, ale również ryzyko. Równowaga między innowacją a bezpieczeństwem musi być zachowana.')">
+  <h3>⚖️ Korzyści i ryzyko</h3>
+  <p>Balans między innowacją a odpowiedzialnością.</p>
+</div>
 
-    <nav>
-        <a href="https://openai.com/safety" target="_blank" onclick="playClick()">OpenAI Safety</a>
-        <a href="https://futureoflife.org" target="_blank" onclick="playClick()">Future of Life</a>
-        <a href="https://alignmentforum.org" target="_blank" onclick="playClick()">AI Alignment</a>
-    </nav>
-
-    <div class="container">
-        <div class="card">
-            <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
-            <p>Sztuczna inteligencja ma potencjał do zmiany świata, ale niekontrolowane jej działanie może być niebezpieczne. Z odpowiednią kontrolą może jednak pomóc w rozwiązywaniu wielu problemów. Ważne jest, aby zapewnić, że AI nie będzie wykorzystywana w sposób szkodliwy dla ludzkości. Sztuczna inteligencja to technologia, którą należy rozwijać z pełną odpowiedzialnością. Musimy zapewnić, że decyzje podejmowane przez AI będą zawsze zbieżne z wartościami społecznymi. Co więcej, musimy zapobiegać manipulacjom ze strony podmiotów złośliwych.</p>
-        </div>
-
-        <div class="card">
-            <h3>🎭 Deepfake: Złudzenie rzeczywistości</h3>
-            <p>Technologia deepfake pozwala na tworzenie bardzo realistycznych materiałów wideo. Może to prowadzić do ogromnych problemów, takich jak manipulacja opinią publiczną czy oszustwa. W przypadku nieodpowiedzialnego użycia, może to stanowić zagrożenie dla demokracji. AI może generować wideo z fikcyjnymi wydarzeniami, które wyglądają jak prawdziwe. Dzięki tej technologii, przestępcy mogą tworzyć fałszywe nagrania, które niszczą reputację osób i firm.</p>
-        </div>
-
-        <div class="card">
-            <h3>💣 AI w cyberatakach: Niebezpieczne w rękach złoczyńców</h3>
-            <p>Przestępcy wykorzystują AI do przeprowadzania cyberataków, które są trudniejsze do wykrycia. Technologie sztucznej inteligencji mogą przełamać zabezpieczenia w systemach, czyniąc je bardziej podatnymi na ataki. Przestępcy uczą AI wykorzystywania nowych słabych punktów w systemach komputerowych. Z pomocą AI, możliwe jest prowadzenie skomplikowanych ataków w czasie rzeczywistym. Ochrona przed takimi atakami wymaga dynamicznej i elastycznej obrony w cyberprzestrzeni.</p>
-        </div>
-
-        <div class="card">
-            <h3>🤖 Autonomiczne decyzje: Kto będzie odpowiedzialny?</h3>
-            <p>Decyzje podejmowane przez AI mają wpływ na życie ludzi, dlatego muszą być odpowiedzialne. W przyszłości AI będzie podejmować decyzje w wielu krytycznych obszarach, takich jak medycyna czy prawo. Kiedy sztuczna inteligencja podejmie złą decyzję, musimy określić, kto będzie za nią odpowiedzialny. Z perspektywy prawnej, odpowiedzialność za decyzje AI nie jest jednoznaczna. Ważne jest, by odpowiedzialność za decyzje AI była dobrze uregulowana w ramach systemu prawnego.</p>
-        </div>
-
-        <div class="card">
-            <h3>🚀 Przyszłość AI: Jak AI może zmienić świat?</h3>
-            <p>AI ma potencjał do rewolucji w niemal każdej dziedzinie życia, od medycyny po transport. Wiele branż korzysta z AI do poprawy efektywności i wydajności. Jednocześnie pojawiają się pytania o etyczne aspekty wykorzystania tej technologii. Kiedy AI stanie się autonomiczne, może podejmować decyzje bez ludzkiej ingerencji, co rodzi pytania o kontrolę i bezpieczeństwo. Będziemy musieli stworzyć odpowiednie regulacje, które będą nadzorować rozwój tej technologii.</p>
-        </div>
-
-        <div class="card">
-            <h3>🔍 Przypadki użycia AI: Gdzie już teraz korzystamy?</h3>
-            <p>AI znajduje zastosowanie w wielu dziedzinach, takich jak rozpoznawanie obrazów, diagnoza medyczna, czy inteligentne systemy transportowe. Wykorzystuje się ją także w automatyzacji procesów biznesowych. AI pomaga w analizie ogromnych ilości danych, co pozwala na szybsze podejmowanie decyzji. Coraz częściej AI jest wykorzystywana w rolnictwie, prognozowaniu pogody, a także w rozwoju nowoczesnych technologii. W przyszłości AI będzie odgrywać kluczową rolę w wielu nowych dziedzinach, w tym w eksploracji kosmosu i rozwoju technologii quantum.</p>
-        </div>
-
+  </div>  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <p id="modalText"></p>
+      <button class="close-btn" onclick="closeModal()">Zamknij</button>
     </div>
+  </div>  <footer>
+    &copy; 2025 Piotr | Strona edukacyjna o AI
+  </footer><audio id="clickSound" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto"></audio>
 
-    <footer>
-        <p>© 2025 Bezpieczeństwo AI | Wszystkie prawa zastrzeżone</p>
-    </footer>
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('light');
+    }
 
-    <audio id="clickSound">
-        <source src="click1.mp3" type="audio/mp3">
-    </audio>
+    function playClick() {
+      const click = document.getElementById("clickSound");
+      click.currentTime = 0;
+      click.play();
+    }
 
-    <script>
-        function playClick() {
-            let clickSound = document.getElementById("clickSound");
-            clickSound.play();
-        }
+    function speak() {
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.lang = 'pl-PL';
+      utterance.text = "Panie Ludwiku, nie wiedziałem co wpisać, więc oddaję głos Mickiewiczowi: \nLitwo! Ojczyzno moja! ty jesteś jak zdrowie. Ile cię trzeba cenić, ten tylko się dowie, kto cię stracił. Dziś piękność twą w całej ozdobie widzę i opisuję, bo tęsknię po tobie.";
+      window.speechSynthesis.speak(utterance);
+    }
 
-        function toggleMode() {
-            document.body.classList.toggle("light");
-        }
+    function openModal(title, text) {
+      playClick();
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalText").innerText = text;
+      document.getElementById("modal").classList.add("active");
+    }
 
-        function speak() {
-            let utterance = new SpeechSynthesisUtterance("Panie Ludwiku, nie wiedziałem, co wpisać, więc oto moje słowa...");
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
+    function closeModal() {
+      document.getElementById("modal").classList.remove("active");
+    }
+  </script></body>
 </html>
