@@ -1,216 +1,218 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI: Bezpieczna czy nie?</title>
-    <style>
-        :root {
-            --bg-color: #0f0f0f;
-            --text-color: #fff;
-            --accent: #00ffaa;
-            --card-bg: #1a1a1a;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bezpieczeństwo Sztucznej Inteligencji</title>
+  <style>
+    :root {
+      --bg-color: #0d0d0d;
+      --text-color: #ffffff;
+      --accent: #00ffaa;
+      --card-bg: #1a1a1a;
+    }
 
-        body.light {
-            --bg-color: #f0f0f0;
-            --text-color: #111;
-            --accent: #007777;
-            --card-bg: #ffffff;
-        }
+    body.light {
+      --bg-color: #ffffff;
+      --text-color: #111111;
+      --accent: #007777;
+      --card-bg: #f5f5f5;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            transition: all 0.3s ease;
-            animation: fadeIn 1s ease-out;
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      transition: all 0.3s ease;
+    }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
+    header {
+      text-align: center;
+      padding: 30px 10px 10px;
+    }
 
-        header {
-            text-align: center;
-            padding: 30px;
-            animation: slideDown 1s ease-in-out;
-        }
+    h1 {
+      font-size: 2.8em;
+      color: var(--accent);
+    }
 
-        @keyframes slideDown {
-            0% { transform: translateY(-50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: var(--accent);
+      color: var(--bg-color);
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        h1 {
-            font-size: 3em;
-            color: var(--accent);
-            transition: transform 0.5s ease;
-        }
+    button:hover {
+      background-color: #ffaa00;
+    }
 
-        h1:hover {
-            transform: scale(1.1);
-        }
+    nav {
+      text-align: center;
+      margin: 20px;
+    }
 
-        nav {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    nav a {
+      margin: 5px;
+      padding: 8px 12px;
+      text-decoration: none;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      transition: 0.3s;
+    }
 
-        nav a {
-            color: var(--accent);
-            margin: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 12px;
-            border: 2px solid var(--accent);
-            border-radius: 10px;
-            transition: 0.3s;
-        }
+    nav a:hover {
+      background-color: var(--accent);
+      color: var(--bg-color);
+    }
 
-        nav a:hover {
-            background-color: var(--accent);
-            color: var(--bg-color);
-        }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            animation: slideUp 1s ease-in-out;
-        }
+    .card {
+      background-color: var(--card-bg);
+      border-left: 5px solid var(--accent);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 0 10px #0005;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-        @keyframes slideUp {
-            0% { transform: translateY(50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
+    .card:hover {
+      transform: scale(1.02);
+    }
 
-        .card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-left: 5px solid var(--accent);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px #0003;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: gray;
+    }
 
-        .card:hover {
-            transform: scale(1.05);
-        }
+    .fullscreen-modal {
+      position: fixed;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-        button {
-            background-color: var(--accent);
-            color: var(--bg-color);
-            border: none;
-            padding: 10px 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            margin: 10px;
-            transition: background-color 0.3s;
-        }
+    .fullscreen-modal.active {
+      display: flex;
+    }
 
-        button:hover {
-            background-color: #ffaa00;
-        }
+    .modal-content {
+      background: var(--card-bg);
+      color: var(--text-color);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow: auto;
+    }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: gray;
-        }
-
-        /* Fullscreen modal */
-        .fullscreen-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 9999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .fullscreen-modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 80%;
-            overflow: auto;
-        }
-
-    </style>
+    .modal-content h3 {
+      margin-top: 0;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
-        <button onclick="toggleMode()">Przełącz Tryb Jasny/Ciemny</button>
-        <button onclick="speak()">Panie Ludwiku, nie wiedziałem, co wpisać (i dalej inwokacja)</button>
-    </header>
+  <header>
+    <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
+    <button onclick="toggleMode()">Przełącz Tryb Jasny/Ciemny</button>
+    <button onclick="speakInwokacja()">Dla Pana Ludwika</button>
+  </header>
 
-    <nav>
-        <a href="https://openai.com/safety" target="_blank" onclick="playClick()">OpenAI Safety</a>
-        <a href="https://futureoflife.org" target="_blank" onclick="playClick()">Future of Life</a>
-        <a href="https://alignmentforum.org" target="_blank" onclick="playClick()">AI Alignment</a>
-    </nav>
+  <nav>
+    <a href="https://openai.com/safety" target="_blank" onclick="playClick()">OpenAI</a>
+    <a href="https://futureoflife.org" target="_blank" onclick="playClick()">Future of Life</a>
+    <a href="https://alignmentforum.org" target="_blank" onclick="playClick()">AI Alignment</a>
+  </nav>
 
-    <div class="container">
-        <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'Sztuczna inteligencja to narzędzie, które w przyszłości może mieć ogromny wpływ na nasze życie. Od automatyzacji w pracy po podejmowanie decyzji w obszarze zdrowia, edukacji czy transportu. Jeżeli sztuczna inteligencja nie zostanie odpowiednio kontrolowana, może stać się zagrożeniem. Bezpieczeństwo AI nie jest tylko kwestią ochrony przed złośliwym użyciem technologii, ale także zapewnienia, że AI nie podejmie decyzji, które mogą zaszkodzić społeczeństwu. Musimy być gotowi, aby zarządzać tymi potężnymi narzędziami w sposób odpowiedzialny.')">
-            <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
-        </div>
+  <div class="container">
 
-        <div class="card" onclick="openModal('Zagadnienia etyczne w AI', 'Sztuczna inteligencja rodzi liczne zagadnienia etyczne. Jak zapewnić, by AI działała w sposób sprawiedliwy i sprawiedliwy? Jakie są granice w wykorzystywaniu danych i ochronie prywatności? Jakie powinny być odpowiedzialności twórców AI? Odpowiedzi na te pytania mają kluczowe znaczenie, abyśmy jako społeczeństwo nie stracili kontroli nad technologią.')">
-            <h3>💡 Zagadnienia etyczne w AI</h3>
-        </div>
-
-        <div class="card" onclick="openModal('Ryzyko dezinformacji i manipulacji', 'AI może być używana do tworzenia fałszywych informacji, które mogą manipulować opinią publiczną. Technologie takie jak deepfake czy generowanie tekstów mogą być wykorzystywane do rozprzestrzeniania dezinformacji, a w konsekwencji wpłynąć na demokrację i zaufanie społeczne. Musimy być świadomi tych zagrożeń i wprowadzać odpowiednie regulacje.')">
-            <h3>⚠️ Ryzyko dezinformacji i manipulacji</h3>
-        </div>
-
-        <div class="card" onclick="openModal('Wyzwania związane z nadzorem nad AI', 'Zarządzanie sztuczną inteligencją wiąże się z wieloma wyzwaniami, od nadzoru po tworzenie norm i regulacji. Aby zapewnić bezpieczeństwo, musimy stworzyć odpowiednie systemy nadzoru, które będą monitorować rozwój AI i wdrażać odpowiednie regulacje, zanim technologia wyprzedzi nasze zdolności do kontrolowania jej.')">
-            <h3>🔍 Wyzwania związane z nadzorem nad AI</h3>
-        </div>
-
+    <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'AI może podejmować decyzje w kluczowych obszarach życia. Brak kontroli może prowadzić do poważnych zagrożeń. Potrzebujemy jasnych zasad i nadzoru.')">
+      <h3>Dlaczego bezpieczeństwo AI jest ważne?</h3>
     </div>
 
-    <footer>
-        &copy; 2025 Piotr i jego superstrona z Notatnika. Sztuczna, ale szczera.
-    </footer>
-
-    <!-- Audio & JS -->
-    <audio id="clickSound" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto"></audio>
-    
-    <!-- Fullscreen Modal -->
-    <div id="fullscreenModal" class="fullscreen-modal">
-        <div class="modal-content">
-            <h3 id="modalTitle"></h3>
-            <p id="modalContent"></p>
-            <button onclick="closeModal()">Zamknij</button>
-        </div>
+    <div class="card" onclick="openModal('Ryzyka wynikające z AI', 'Sztuczna inteligencja może zostać użyta do masowej dezinformacji, automatycznego nadzoru, a nawet militarnych zastosowań. To nie jest sci-fi — to rzeczywistość.')">
+      <h3>Ryzyka wynikające z AI</h3>
     </div>
 
-    <script>
-        function toggleMode() {
-            document.body.classList.toggle("light");
-        }
+    <div class="card" onclick="openModal('Co robią organizacje?', 'Organizacje takie jak OpenAI, FLI i Alignment Forum prowadzą badania nad tym, jak uczynić AI bezpieczną, uczciwą i zrozumiałą dla człowieka.')">
+      <h3>Co robią organizacje?</h3>
+    </div>
 
-        function playClick() {
-            document.getElementById("clickSound").play();
-        }
+    <div class="card" onclick="openModal('AI a społeczeństwo', 'Potrzebujemy szerokiej debaty społecznej o AI. Każdy obywatel powinien wiedzieć, jak działają algorytmy, które wpływają na jego życie.')">
+      <h3>AI a społeczeństwo</h3>
+    </div>
 
-        function speak() {
-            const speech = new SpeechSynthesisUtterance();
-            speech.text = "Panie Ludwiku, nie wiedziałem, co wpisać, więc oto moje słowa, które wznoszą się ku Wam jak wiatry wielkich idei! O, ludu, który czeka w niecierpliwości na tajemnice świata sztucz
+    <div class="card" onclick="openModal('Nad czym warto pracować?', 'Transparentność, kontrola, współpraca międzynarodowa. Przyszłość AI to odpowiedzialność nas wszystkich.')">
+      <h3>Nad czym warto pracować?</h3>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Piotr. Wszystkie prawa nienaruszone. Przez AI czuwane.
+  </footer>
+
+  <!-- Audio -->
+  <audio id="clickSound" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto"></audio>
+
+  <!-- Fullscreen Modal -->
+  <div id="fullscreenModal" class="fullscreen-modal">
+    <div class="modal-content">
+      <h3 id="modalTitle"></h3>
+      <p id="modalContent"></p>
+      <button onclick="closeModal()">Zamknij</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('light');
+    }
+
+    function playClick() {
+      const audio = document.getElementById("clickSound");
+      if (audio) audio.play();
+    }
+
+    function speakInwokacja() {
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.lang = "pl-PL";
+      utterance.text = "Litwo, Ojczyzno moja! ty jesteś jak zdrowie; Ile cię trzeba cenić, ten tylko się dowie, Kto cię stracił. Dziś piękność twą w całej ozdobie Widzę i opisuję, bo tęsknię po tobie.";
+      speechSynthesis.speak(utterance);
+    }
+
+    function openModal(title, content) {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalContent").innerText = content;
+      document.getElementById("fullscreenModal").classList.add("active");
+      playClick();
+    }
+
+    function closeModal() {
+      document.getElementById("fullscreenModal").classList.remove("active");
+    }
+  </script>
+
+</body>
+</html>
