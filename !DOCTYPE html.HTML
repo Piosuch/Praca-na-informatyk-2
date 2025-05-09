@@ -151,20 +151,6 @@
             overflow: auto;
         }
 
-        .modal-content h3 {
-            color: var(--accent);
-        }
-
-        .modal-content p {
-            color: #333;
-            font-size: 1.1em;
-        }
-
-        /* Adding transitions for smoother fullscreen modal effect */
-        .modal-content, .fullscreen-modal {
-            transition: all 0.5s ease-in-out;
-        }
-
     </style>
 </head>
 <body>
@@ -186,16 +172,16 @@
             <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
         </div>
 
-        <div class="card" onclick="openModal('Jakie są zagrożenia związane z AI?', 'Współczesne systemy AI mogą podejmować decyzje w obszarach, które mają ogromny wpływ na życie ludzkie. Zdarza się, że AI może podejmować błędne decyzje, ponieważ nie rozumie w pełni kontekstu. Inne zagrożenia to możliwość wykorzystania AI do celów złośliwych, takich jak manipulacja opinią publiczną czy ataki na systemy informacyjne.')">
-            <h3>⚠️ Jakie są zagrożenia związane z AI?</h3>
+        <div class="card" onclick="openModal('Zagadnienia etyczne w AI', 'Sztuczna inteligencja rodzi liczne zagadnienia etyczne. Jak zapewnić, by AI działała w sposób sprawiedliwy i sprawiedliwy? Jakie są granice w wykorzystywaniu danych i ochronie prywatności? Jakie powinny być odpowiedzialności twórców AI? Odpowiedzi na te pytania mają kluczowe znaczenie, abyśmy jako społeczeństwo nie stracili kontroli nad technologią.')">
+            <h3>💡 Zagadnienia etyczne w AI</h3>
         </div>
 
-        <div class="card" onclick="openModal('Jakie są rozwiązania i regulacje?', 'Aby zapobiec zagrożeniom wynikającym z rozwoju sztucznej inteligencji, wprowadzono różne regulacje prawne. Przykładem może być projekt AI Act w Unii Europejskiej, który ma na celu ustalenie norm dla rozwoju i wykorzystywania AI w różnych dziedzinach. Ważne jest również, aby rozwój AI był transparentny i etyczny, a jego stosowanie nadzorowane przez odpowiednie organy.')">
-            <h3>🛡️ Jakie są rozwiązania i regulacje?</h3>
+        <div class="card" onclick="openModal('Ryzyko dezinformacji i manipulacji', 'AI może być używana do tworzenia fałszywych informacji, które mogą manipulować opinią publiczną. Technologie takie jak deepfake czy generowanie tekstów mogą być wykorzystywane do rozprzestrzeniania dezinformacji, a w konsekwencji wpłynąć na demokrację i zaufanie społeczne. Musimy być świadomi tych zagrożeń i wprowadzać odpowiednie regulacje.')">
+            <h3>⚠️ Ryzyko dezinformacji i manipulacji</h3>
         </div>
 
-        <div class="card" onclick="openModal('AI a człowiek: jak współpracować?', 'Chociaż AI staje się coraz bardziej zaawansowane, człowiek nadal odgrywa kluczową rolę w rozwoju i nadzorze nad tymi technologiami. Współpraca między człowiekiem a maszyną może prowadzić do ogromnych korzyści, takich jak poprawa jakości życia, rozwój medycyny czy efektywność w pracy. Kluczem jest odpowiedzialne zarządzanie i zrozumienie, jak AI może wspierać, a nie zastępować człowieka.')">
-            <h3>👨‍💻 AI a człowiek: jak współpracować?</h3>
+        <div class="card" onclick="openModal('Wyzwania związane z nadzorem nad AI', 'Zarządzanie sztuczną inteligencją wiąże się z wieloma wyzwaniami, od nadzoru po tworzenie norm i regulacji. Aby zapewnić bezpieczeństwo, musimy stworzyć odpowiednie systemy nadzoru, które będą monitorować rozwój AI i wdrażać odpowiednie regulacje, zanim technologia wyprzedzi nasze zdolności do kontrolowania jej.')">
+            <h3>🔍 Wyzwania związane z nadzorem nad AI</h3>
         </div>
 
     </div>
@@ -224,3 +210,7 @@
         function playClick() {
             document.getElementById("clickSound").play();
         }
+
+        function speak() {
+            const speech = new SpeechSynthesisUtterance();
+            speech.text = "Panie Ludwiku, nie wiedziałem, co wpisać, więc oto moje słowa, które wznoszą się ku Wam jak wiatry wielkich idei! O, ludu, który czeka w niecierpliwości na tajemnice świata sztucz
