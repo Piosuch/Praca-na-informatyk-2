@@ -152,21 +152,21 @@
       color: #111;
     }
 
-    .spark {
-      position: fixed;
-      background: var(--accent);
+    /* Iskry */
+    .sparkle {
+      position: absolute;
       border-radius: 50%;
+      background-color: #fff;
+      animation: sparkle 1s ease-out infinite;
       pointer-events: none;
-      animation: spark-move 0.5s ease-out forwards;
-      z-index: 9999;
     }
 
-    @keyframes spark-move {
-      to {
-        transform: translate(var(--dx), var(--dy));
-        opacity: 0;
-      }
+    @keyframes sparkle {
+      0% { transform: scale(0); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.8; }
+      100% { transform: scale(0); opacity: 0; }
     }
+
   </style>
 </head>
 <body>
@@ -208,7 +208,7 @@
     &copy; 2025 Piotr i jego superstrona z Notatnika.
   </footer>
 
-  <audio id="clickSound" src="pup.mp3" preload="auto"></audio>
+  <audio id="clickSound" src="pup.mp3" preload="auto"></audio> <!-- Nowy plik dźwiękowy -->
 
   <div id="fullscreenModal" class="fullscreen-modal">
     <div class="modal-content">
@@ -251,7 +251,7 @@ I w Ostrej świecisz Bramie! Ty, co gród zamkowy
 Nowogródzki ochraniasz z jego wiernym ludem!`;
 
       inwokacja = new SpeechSynthesisUtterance(tekst);
-      inwokacja.lang = "pl-PL";
+      inwokacja.lang = "pl-PL"; // Ustawienie języka na polski
       window.speechSynthesis.speak(inwokacja);
     }
 
@@ -261,32 +261,28 @@ Nowogródzki ochraniasz z jego wiernym ludem!`;
       }
     }
 
-    document.addEventListener("click", function (e) {
-      const sparkCount = 20;
-      for (let i = 0; i < sparkCount; i++) {
-        const spark = document.createElement("div");
-        spark.className = "spark";
-        document.body.appendChild(spark);
-
-        const size = Math.random() * 4 + 2 + "px";
-        spark.style.width = size;
-        spark.style.height = size;
-        spark.style.left = e.clientX + "px";
-        spark.style.top = e.clientY + "px";
-
-        const angle = Math.random() * 2 * Math.PI;
-        const speed = Math.random() * 5 + 2;
-        const dx = Math.cos(angle) * speed;
-        const dy = Math.sin(angle) * speed;
-
-        spark.style.setProperty("--dx", dx + "px");
-        spark.style.setProperty("--dy", dy + "px");
-
-        setTimeout(() => {
-          spark.remove();
-        }, 500);
+    // Skrypt do generowania iskier
+    document.body.addEventListener('click', (event) => {
+      for (let i = 0; i < 5; i++) {
+        createSparkle(event.pageX, event.pageY);
       }
     });
+
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = `${x - 10}px`;
+      sparkle.style.top = `${y - 10}px`;
+      sparkle.style.width = `${Math.random() * 20 + 15}px`; // Losowy rozmiar iskry
+      sparkle.style.height = sparkle.style.width;
+      sparkle.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
+      document.body.appendChild(sparkle);
+
+      // Usuwanie iskry po jej animacji
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1000);
+    }
   </script>
 </body>
 </html>
