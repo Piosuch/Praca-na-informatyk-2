@@ -166,16 +166,8 @@
     <a href="https://alignmentforum.org" target="_blank" onclick="playClick()">AI Alignment</a>
   </nav>
 
-  <div class="container">
-    <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'Sztuczna inteligencja może podejmować decyzje wpływające na miliony ludzi. Jeśli nie będzie nadzorowana i projektowana odpowiedzialnie, może prowadzić do problemów etycznych, społecznych i technologicznych.')">
-      <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
-    </div>
-    <div class="card" onclick="openModal('Zagrożenia związane z AI', 'Nieodpowiednio nadzorowane AI może być wykorzystane do manipulacji informacją, automatyzacji broni lub masowego śledzenia.')">
-      <h3>⚠️ Zagrożenia związane z AI</h3>
-    </div>
-    <div class="card" onclick="openModal('Jak można uczynić AI bezpieczną?', 'Potrzebne są odpowiednie regulacje, przejrzystość algorytmów, testowanie i zaangażowanie społeczności naukowej w rozwój technologii.')">
-      <h3>✅ Jak uczynić AI bezpieczną?</h3>
-    </div>
+  <div class="container" id="cardsContainer">
+    <!-- Moduły będą dodane przez JS -->
   </div>
 
   <footer>
@@ -223,8 +215,8 @@ Widzę i opisuję, bo tęsknię po tobie.
 Panno Święta, co Jasnej bronisz Częstochowy
 I w Ostrej świecisz Bramie! Ty, co gród zamkowy
 Nowogródzki ochraniasz z jego wiernym ludem!`;
-
       inwokacja = new SpeechSynthesisUtterance(tekst);
+      inwokacja.lang = 'pl-PL';
       window.speechSynthesis.speak(inwokacja);
     }
 
@@ -233,6 +225,38 @@ Nowogródzki ochraniasz z jego wiernym ludem!`;
         window.speechSynthesis.cancel();
       }
     }
+
+    const moduly = [
+      {
+        tytul: "🔒 Dlaczego bezpieczeństwo AI jest ważne?",
+        tresc: "Sztuczna inteligencja może podejmować decyzje wpływające na miliony ludzi. Jej zastosowania sięgają medycyny, transportu, edukacji i obronności. Błędy lub brak nadzoru mogą prowadzić do katastrofalnych skutków, zarówno finansowych, jak i społecznych. Właściwe podejście do projektowania i monitorowania systemów AI może zmniejszyć ryzyko. Bezpieczeństwo to nie tylko technologia, ale też etyka i odpowiedzialność."
+      },
+      {
+        tytul: "⚠️ Zagrożenia związane z AI",
+        tresc: "AI może być użyta do manipulowania opinią publiczną poprzez deepfake’i i boty. W rękach złych aktorów może posłużyć do automatyzacji ataków hakerskich lub tworzenia broni. Brak przejrzystości w działaniu algorytmów utrudnia wykrywanie uprzedzeń i błędów. Wzrost autonomii maszyn może prowadzić do sytuacji wymykających się spod kontroli. To nie są tylko futurystyczne scenariusze, ale realne ryzyka już dziś."
+      },
+      {
+        tytul: "✅ Jak uczynić AI bezpieczną?",
+        tresc: "Bezpieczeństwo AI wymaga wielowarstwowego podejścia. Potrzebujemy jasnych regulacji, przejrzystości modeli oraz współpracy międzynarodowej. Testowanie i audyty algorytmów powinny być obowiązkowe przed wdrożeniem na dużą skalę. Edukacja społeczeństwa o możliwościach i ograniczeniach AI jest kluczowa. Tylko tak można uniknąć sytuacji, w której technologia wyprzedza ludzką odpowiedzialność."
+      },
+      {
+        tytul: "🧠 Przejrzystość algorytmów",
+        tresc: "Modele AI często są czarnymi skrzynkami, co oznacza brak zrozumienia ich decyzji. Przejrzystość pozwala na identyfikowanie uprzedzeń i błędów. Użytkownicy powinni wiedzieć, jak dane są przetwarzane i na jakiej podstawie podejmowane są decyzje. Zwiększa to zaufanie do technologii i umożliwia korektę działań AI. Transparentność to fundament odpowiedzialnej sztucznej inteligencji."
+      },
+      {
+        tytul: "⚙️ Rola człowieka w nadzorze AI",
+        tresc: "AI nie może działać w pełni autonomicznie bez ludzkiego nadzoru. Człowiek powinien mieć ostatnie słowo w decyzjach krytycznych, takich jak medycyna czy prawo. Systemy powinny być projektowane z mechanizmami zatrzymania działania w razie potrzeby. Nadmierne zaufanie do algorytmów może prowadzić do zaniechania myślenia krytycznego. Człowiek i AI powinni współpracować, a nie rywalizować."
+      }
+    ];
+
+    const container = document.getElementById("cardsContainer");
+    moduly.forEach(modul => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `<h3>${modul.tytul}</h3>`;
+      div.onclick = () => openModal(modul.tytul, modul.tresc);
+      container.appendChild(div);
+    });
   </script>
 </body>
 </html>
