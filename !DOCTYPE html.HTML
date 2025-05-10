@@ -10,8 +10,6 @@
       --text-color: #fff;
       --accent: #00ffaa;
       --card-bg: #1a1a1a;
-      --modal-bg: #fff;
-      --modal-text: #000;
     }
 
     body.light {
@@ -19,8 +17,6 @@
       --text-color: #111;
       --accent: #007777;
       --card-bg: #ffffff;
-      --modal-bg: #000;
-      --modal-text: #fff;
     }
 
     body {
@@ -147,13 +143,13 @@
     }
 
     .modal-content {
-      background-color: var(--modal-bg);
-      color: var(--modal-text);
+      background-color: white;
       padding: 30px;
       border-radius: 10px;
       max-width: 80%;
       overflow: auto;
       max-height: 80%;
+      color: #111;
     }
   </style>
 </head>
@@ -172,14 +168,23 @@
   </nav>
 
   <div class="container">
-    <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'Sztuczna inteligencja może podejmować decyzje wpływające na miliony ludzi. Brak kontroli może skutkować poważnymi konsekwencjami. AI musi być zaprojektowana z myślą o bezpieczeństwie. Etyka i nadzór to podstawa. Każdy błąd może mieć globalne skutki.')">
+    <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'Sztuczna inteligencja może podejmować decyzje wpływające na miliony ludzi. Jeśli nie będzie nadzorowana i projektowana odpowiedzialnie, może prowadzić do problemów etycznych, społecznych i technologicznych.')">
       <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
     </div>
-    <div class="card" onclick="openModal('Zagrożenia związane z AI', 'AI może zostać wykorzystana do szkodliwych celów. Może wspierać dezinformację lub cyberataki. Broń autonomiczna to realne zagrożenie. Brak regulacji to ryzyko. Potrzebna jest ostrożność i przewidywanie.')">
+    <div class="card" onclick="openModal('Zagrożenia związane z AI', 'Nieodpowiednio nadzorowane AI może być wykorzystane do manipulacji informacją, automatyzacji broni lub masowego śledzenia.')">
       <h3>⚠️ Zagrożenia związane z AI</h3>
     </div>
-    <div class="card" onclick="openModal('Jak uczynić AI bezpieczną?', 'Należy wprowadzać surowe testy i walidacje. Współpraca naukowców z całego świata jest kluczowa. Przejrzystość algorytmów buduje zaufanie. Użytkownicy muszą być świadomi. Regulacje rządowe również są potrzebne.')">
+    <div class="card" onclick="openModal('Jak można uczynić AI bezpieczną?', 'Potrzebne są odpowiednie regulacje, przejrzystość algorytmów, testowanie i zaangażowanie społeczności naukowej w rozwój technologii.')">
       <h3>✅ Jak uczynić AI bezpieczną?</h3>
+    </div>
+    <div class="card" onclick="openModal('Etyka i AI', 'Etyka w sztucznej inteligencji koncentruje się na projektowaniu i wdrażaniu systemów, które szanują prawa człowieka, sprawiedliwość i odpowiedzialność.')">
+      <h3>⚖️ Etyka i AI</h3>
+    </div>
+    <div class="card" onclick="openModal('Zaufanie do AI', 'Zaufanie do systemów AI można budować poprzez zapewnienie ich przejrzystości, sprawiedliwości i odpowiedzialności za decyzje, które podejmują.')">
+      <h3>🤝 Zaufanie do AI</h3>
+    </div>
+    <div class="card" onclick="openModal('AI w medycynie', 'AI w medycynie może pomóc w diagnozowaniu chorób, prognozowaniu wyników leczenia i opracowywaniu indywidualnych planów leczenia.')">
+      <h3>💉 AI w medycynie</h3>
     </div>
   </div>
 
@@ -228,8 +233,9 @@ Widzę i opisuję, bo tęsknię po tobie.
 Panno Święta, co Jasnej bronisz Częstochowy
 I w Ostrej świecisz Bramie! Ty, co gród zamkowy
 Nowogródzki ochraniasz z jego wiernym ludem!`;
+
       inwokacja = new SpeechSynthesisUtterance(tekst);
-      inwokacja.lang = 'pl-PL';
+      inwokacja.lang = "pl-PL"; // Ustawienie języka na polski
       window.speechSynthesis.speak(inwokacja);
     }
 
