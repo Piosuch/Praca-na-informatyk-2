@@ -96,7 +96,6 @@
       box-shadow: 0 0 10px #0003;
       transition: transform 0.3s ease;
       cursor: pointer;
-      position: relative;
     }
 
     .card:hover {
@@ -154,20 +153,17 @@
     }
 
     .spark {
-      position: absolute;
+      position: fixed;
+      background: var(--accent);
       border-radius: 50%;
-      background-color: #00ffaa;
-      animation: sparkAnimation 0.5s ease-out;
       pointer-events: none;
+      animation: spark-move 0.5s ease-out forwards;
+      z-index: 9999;
     }
 
-    @keyframes sparkAnimation {
-      0% {
-        transform: scale(0) translate(-50%, -50%);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(3) translate(-50%, -50%);
+    @keyframes spark-move {
+      to {
+        transform: translate(var(--dx), var(--dy));
         opacity: 0;
       }
     }
@@ -212,7 +208,7 @@
     &copy; 2025 Piotr i jego superstrona z Notatnika.
   </footer>
 
-  <audio id="clickSound" src="pup.mp3" preload="auto"></audio> <!-- Nowy plik dźwiękowy -->
+  <audio id="clickSound" src="pup.mp3" preload="auto"></audio>
 
   <div id="fullscreenModal" class="fullscreen-modal">
     <div class="modal-content">
@@ -229,7 +225,6 @@
 
     function playClick() {
       document.getElementById("clickSound").play();
-      createSpark(event);
     }
 
     function openModal(title, content) {
@@ -241,26 +236,6 @@
 
     function closeModal() {
       document.getElementById("fullscreenModal").classList.remove("active");
-    }
-
-    function createSpark(event) {
-      const spark = document.createElement("div");
-      spark.classList.add("spark");
-      document.body.appendChild(spark);
-
-      const size = Math.random() * 10 + 10;
-      spark.style.width = `${size}px`;
-      spark.style.height = `${size}px`;
-
-      const x = event.clientX;
-      const y = event.clientY;
-
-      spark.style.left = `${x - size / 2}px`;
-      spark.style.top = `${y - size / 2}px`;
-
-      setTimeout(() => {
-        spark.remove();
-      }, 500);
     }
 
     let inwokacja;
@@ -276,7 +251,7 @@ I w Ostrej świecisz Bramie! Ty, co gród zamkowy
 Nowogródzki ochraniasz z jego wiernym ludem!`;
 
       inwokacja = new SpeechSynthesisUtterance(tekst);
-      inwokacja.lang = "pl-PL"; // Ustawienie języka na polski
+      inwokacja.lang = "pl-PL";
       window.speechSynthesis.speak(inwokacja);
     }
 
@@ -285,6 +260,33 @@ Nowogródzki ochraniasz z jego wiernym ludem!`;
         window.speechSynthesis.cancel();
       }
     }
+
+    document.addEventListener("click", function (e) {
+      const sparkCount = 20;
+      for (let i = 0; i < sparkCount; i++) {
+        const spark = document.createElement("div");
+        spark.className = "spark";
+        document.body.appendChild(spark);
+
+        const size = Math.random() * 4 + 2 + "px";
+        spark.style.width = size;
+        spark.style.height = size;
+        spark.style.left = e.clientX + "px";
+        spark.style.top = e.clientY + "px";
+
+        const angle = Math.random() * 2 * Math.PI;
+        const speed = Math.random() * 5 + 2;
+        const dx = Math.cos(angle) * speed;
+        const dy = Math.sin(angle) * speed;
+
+        spark.style.setProperty("--dx", dx + "px");
+        spark.style.setProperty("--dy", dy + "px");
+
+        setTimeout(() => {
+          spark.remove();
+        }, 500);
+      }
+    });
   </script>
 </body>
 </html>
