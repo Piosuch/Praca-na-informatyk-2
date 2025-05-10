@@ -96,6 +96,7 @@
       box-shadow: 0 0 10px #0003;
       transition: transform 0.3s ease;
       cursor: pointer;
+      position: relative;
     }
 
     .card:hover {
@@ -150,6 +151,25 @@
       overflow: auto;
       max-height: 80%;
       color: #111;
+    }
+
+    .spark {
+      position: absolute;
+      border-radius: 50%;
+      background-color: #00ffaa;
+      animation: sparkAnimation 0.5s ease-out;
+      pointer-events: none;
+    }
+
+    @keyframes sparkAnimation {
+      0% {
+        transform: scale(0) translate(-50%, -50%);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(3) translate(-50%, -50%);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -209,6 +229,7 @@
 
     function playClick() {
       document.getElementById("clickSound").play();
+      createSpark(event);
     }
 
     function openModal(title, content) {
@@ -220,6 +241,26 @@
 
     function closeModal() {
       document.getElementById("fullscreenModal").classList.remove("active");
+    }
+
+    function createSpark(event) {
+      const spark = document.createElement("div");
+      spark.classList.add("spark");
+      document.body.appendChild(spark);
+
+      const size = Math.random() * 10 + 10;
+      spark.style.width = `${size}px`;
+      spark.style.height = `${size}px`;
+
+      const x = event.clientX;
+      const y = event.clientY;
+
+      spark.style.left = `${x - size / 2}px`;
+      spark.style.top = `${y - size / 2}px`;
+
+      setTimeout(() => {
+        spark.remove();
+      }, 500);
     }
 
     let inwokacja;
