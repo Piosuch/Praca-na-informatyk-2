@@ -1,178 +1,177 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bezpieczeństwo AI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI: Bezpieczna czy nie?</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #000b1e, #001a2e);
-      color: #00ffaa;
-      overflow-x: hidden;
-    }
-    
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: radial-gradient(ellipse at center, rgba(0,255,170,0.1) 0%, transparent 70%);
-      animation: pulseGlow 5s infinite ease-in-out;
-      z-index: -1;
+    :root {
+      --bg-color: #0f0f0f;
+      --text-color: #fff;
+      --accent: #00ffaa;
+      --card-bg: #1a1a1a;
+      --border-radius: 10px;
+      --box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      --hover-color: #ffaa00;
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.2; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(1.05); }
+    body.light {
+      --bg-color: #f0f0f0;
+      --text-color: #111;
+      --accent: #007777;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      transition: all 0.3s ease;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     header {
-      padding: 2rem;
       text-align: center;
-      background: rgba(0, 0, 0, 0.4);
-      box-shadow: 0 0 10px #00ffaa;
+      padding: 40px;
+      animation: slideDown 1s ease-in-out;
     }
 
-    header h1 {
-      font-size: 2.5rem;
-      color: #00ffaa;
-      text-shadow: 0 0 10px #00ffaa;
+    @keyframes slideDown {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 3em;
+      color: var(--accent);
+      transition: transform 0.5s ease;
+    }
+
+    h1:hover {
+      transform: scale(1.1);
     }
 
     nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.3);
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     nav a {
+      color: var(--accent);
+      margin: 10px;
       text-decoration: none;
-      color: #00ffaa;
-      padding: 0.5rem 1rem;
-      border: 1px solid #00ffaa;
-      border-radius: 10px;
-      transition: background 0.3s;
+      font-weight: bold;
+      padding: 8px 12px;
+      border: 2px solid var(--accent);
+      border-radius: var(--border-radius);
+      transition: 0.3s;
+      display: inline-block;
     }
 
     nav a:hover {
-      background: #00ffaa;
-      color: #000b1e;
+      background-color: var(--accent);
+      color: var(--bg-color);
+      transform: translateY(-2px);
     }
 
-    main {
-      padding: 2rem;
-      max-width: 1000px;
+    .container {
+      max-width: 900px;
       margin: auto;
-      line-height: 1.6;
+      padding: 20px;
+      animation: slideUp 1s ease-in-out;
     }
 
-    section {
-      margin-bottom: 3rem;
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
     }
 
-    h2 {
-      margin-bottom: 1rem;
-      font-size: 2rem;
-    }
-
-    .fullscreen-module {
+    .card {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-left: 5px solid var(--accent);
+      border-radius: var(--border-radius);
+      margin-bottom: 20px;
+      box-shadow: var(--box-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
-      transition: transform 0.3s;
     }
 
-    .fullscreen-module:hover {
+    .card:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 20px var(--accent);
     }
 
-    .fullscreen-active {
+    button {
+      background-color: var(--accent);
+      color: var(--bg-color);
+      border: none;
+      padding: 12px 18px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: bold;
+      margin: 10px;
+      transition: background-color 0.3s, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: var(--hover-color);
+      transform: scale(1.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: gray;
+      font-size: 0.9em;
+    }
+
+    .fullscreen-modal {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #000b1e;
-      z-index: 100;
-      display: flex;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      display: none;
       justify-content: center;
       align-items: center;
-      padding: 2rem;
-      transition: opacity 0.3s ease;
+      padding: 20px;
+      animation: modalFadeIn 0.5s ease;
     }
 
-    .fullscreen-active .module-content {
-      background: rgba(0, 0, 0, 0.8);
-      color: #00ffaa;
-      border-radius: 10px;
-      padding: 3rem;
-      box-shadow: 0 0 20px #00ffaa;
+    @keyframes modalFadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
-    .module-content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
+    .fullscreen-modal.active {
+      display: flex;
     }
 
-    .module-content p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
+    .modal-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      max-width: 80%;
+      overflow: auto;
+      max-height: 80%;
+      color: #111;
+      text-align: center;
     }
 
-    .module-content button {
-      background: #00ffaa;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      color: #000b1e;
-      transition: background 0.3s;
-    }
-
-    .module-content button:hover {
-      background: #004d40;
-    }
-
-    /* Futurystyczne animacje dla innych elementów */
-    .flash-effect {
-      animation: flashEffect 2s infinite ease-in-out;
-    }
-
-    @keyframes flashEffect {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
-
-    .glowing-button {
-      background: transparent;
-      color: #00ffaa;
-      border: 2px solid #00ffaa;
-      padding: 10px 15px;
-      font-size: 1.2rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .glowing-button:hover {
-      background-color: #00ffaa;
-      color: #000b1e;
-    }
-
-    .glow-shadow {
-      text-shadow: 0 0 15px #00ffaa, 0 0 30px #00ffaa, 0 0 60px #00ffaa;
-    }
-
-    /* Iskry i inne efekty */
+    /* Iskry */
     .sparkle {
       position: absolute;
       border-radius: 50%;
-      background-color: #00ffaa;
+      background-color: #fff;
       animation: sparkle 1s ease-out infinite;
       pointer-events: none;
     }
@@ -183,394 +182,107 @@
       100% { transform: scale(0); opacity: 0; }
     }
 
-    .star {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background-color: #00ffaa;
-      border-radius: 50%;
-      animation: twinkle 2s infinite alternate;
-    }
-
-    @keyframes twinkle {
-      0% { transform: scale(0); opacity: 0.3; }
-      50% { transform: scale(1.5); opacity: 1; }
-      100% { transform: scale(0); opacity: 0.3; }
-    }
-
   </style>
 </head>
 <body>
   <header>
     <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
-    <button onclick="toggleMode()" class="glowing-button">Tryb Jasny/Ciemny</button>
+    <button onclick="toggleMode()">Tryb Jasny/Ciemny</button>
+    <button onclick="startInwokacja()">Inwokacja: Pan Tadeusz</button>
+    <button onclick="stopInwokacja()">Zatrzymaj Inwokację</button>
   </header>
 
   <nav>
-    <a href="#" class="glowing-button" onclick="openModule('AI Safety Basics', 'Podstawy bezpieczeństwa AI to analiza ryzyka oraz regulacje prawne mające na celu zapewnienie, że sztuczna inteligencja będzie rozwijana i wdrażana w sposób odpowiedzialny.')">Podstawy</a>
-    <a href="#" class="glowing-button" onclick="openModule('Ethics in AI', 'Etyka w AI jest kluczowa, aby zapewnić, że technologie będą sprawiedliwe, odpowiedzialne i transparentne.')">Etyka AI</a>
-    <a href="#" class="glowing-button" onclick="openModule('Challenges and Risks', 'Rozwój AI wiąże się z ryzykami, takimi jak wykorzystywanie jej do manipulacji lub niepożądanych działań.')">Wyzwania i zagrożenia</a>
+    <a href="https://openai.com/safety" target="_blank" onclick="playClick()">OpenAI Safety</a>
+    <a href="https://futureoflife.org" target="_blank" onclick="playClick()">Future of Life</a>
+    <a href="https://alignmentforum.org" target="_blank" onclick="playClick()">AI Alignment</a>
   </nav>
 
-  <main>
-    <section>
-      <h2>Dlaczego bezpieczeństwo AI jest ważne?</h2>
-      <p>
-        AI może podejmować decyzje, które wpływają na miliony ludzi. Jeśli nie będzie odpowiednio kontrolowana, może stać się zagrożeniem zarówno dla jednostek, jak i dla całych społeczeństw. 
-        Ważne jest, aby rozwijać AI w sposób, który minimalizuje ryzyko i zapewnia jej bezpieczeństwo, przejrzystość i odpowiedzialność.
-      </p>
-      <button class="glowing-button" onclick="startInwokacja()">Wygeneruj Inwokację</button>
-    </section>
-
-    <section>
-      <h2>Inwokacja AI</h2>
-      <div class="fullscreen-module" onclick="openFullscreenModule()">
-        <p class="glowing-button">Kliknij, aby dowiedzieć się więcej o Inwokacji AI</p>
-      </div>
-    </section>
-  </main>
+  <div class="container">
+    <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'Sztuczna inteligencja może podejmować decyzje wpływające na miliony ludzi. Jeśli nie będzie nadzorowana i projektowana odpowiedzialnie, może prowadzić do problemów etycznych, społecznych i technologicznych.')">
+      <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
+    </div>
+    <div class="card" onclick="openModal('Zagrożenia związane z AI', 'Nieodpowiednio nadzorowane AI może być wykorzystane do manipulacji informacją, automatyzacji broni lub masowego śledzenia.')">
+      <h3>⚠️ Zagrożenia związane z AI</h3>
+    </div>
+    <div class="card" onclick="openModal('Jak można uczynić AI bezpieczną?', 'Potrzebne są odpowiednie regulacje, przejrzystość algorytmów, testowanie i zaangażowanie społeczności naukowej w rozwój technologii.')">
+      <h3>✅ Jak uczynić AI bezpieczną?</h3>
+    </div>
+    <div class="card" onclick="openModal('Etyka i AI', 'Etyka w sztucznej inteligencji koncentruje się na projektowaniu i wdrażaniu systemów, które szanują prawa człowieka, sprawiedliwość i odpowiedzialność.')">
+      <h3>⚖️ Etyka i AI</h3>
+    </div>
+    <div class="card" onclick="openModal('Zaufanie do AI', 'Zaufanie do systemów AI można budować poprzez zapewnienie ich przejrzystości, sprawiedliwości i odpowiedzialności za decyzje, które podejmują.')">
+      <h3>🤝 Zaufanie do AI</h3>
+    </div>
+    <div class="card" onclick="openModal('AI w medycynie', 'AI w medycynie może pomóc w diagnozowaniu chorób, prognozowaniu wyników leczenia i opracowywaniu indywidualnych planów leczenia.')">
+      <h3>💉 AI w medycynie</h3>
+    </div>
+  </div>
 
   <footer>
-    <p>© 2025 Piotr. Projekt oparty na bezpieczeństwie AI.</p>
+    &copy; 2025 Piotr i jego superstrona z Notatnika.
   </footer>
 
-  <!-- Modal fullscreen -->
-  <div id="fullscreenModal" class="fullscreen-active">
-    <div class="module-content">
-      <h2>Inwokacja: Pan Tadeusz</h2>
-      <p>
-        Litwo! Ojczyzno moja! Ty jesteś jak zdrowie...
-      </p>
-      <button onclick="closeFullscreenModule()">Zamknij</button>
+  <audio id="clickSound" src="pup.mp3" preload="auto"></audio>
+
+  <div id="fullscreenModal" class="fullscreen-modal">
+    <div class="modal-content">
+      <h3 id="modalTitle"></h3>
+      <p id="modalContent"></p>
+      <button onclick="closeModal()">Zamknij</button>
     </div>
   </div>
 
   <script>
     function toggleMode() {
-      document.body.classList.toggle('light');
+      document.body.classList.toggle("light");
     }
 
-    function openModule(title, content) {
-      document.querySelector('.fullscreen-active').style.display = 'flex';
-      document.querySelector('.module-content h2').textContent = title;
-      document.querySelector('.module-content p').textContent = content;
+    function playClick() {
+      document.getElementById("clickSound").play();
     }
 
-    function openFullscreenModule() {
-      document.getElementById('fullscreenModal').style.display = 'flex';
+    function openModal(title, content) {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalContent").innerText = content;
+      document.getElementById("fullscreenModal").classList.add("active");
+      playClick();
     }
 
-    function closeFullscreenModule() {
-      document.getElementById('fullscreenModal').style.display = 'none';
+    function closeModal() {
+      document.getElementById("fullscreenModal").classList.remove("active");
     }
+
+    let inwokacja;
 
     function startInwokacja() {
-      alert('Wygenerowano Inwokację: Pan Tadeusz');
-    }
-  </script>
-</body>
-</html><style>
-    /* Efekty wizualne nawigacji */
-    nav a {
-      font-size: 1.1rem;
-      transition: transform 0.3s ease;
-    }
+      stopInwokacja();
+      const tekst = `Litwo! Ojczyzno moja! ty jesteś jak zdrowie;
+Ile cię trzeba cenić, ten tylko się dowie,
+Kto cię stracił. Dziś piękność twą w całej ozdobie
+Widzę i opisuję, bo tęsknię po tobie.
+Panno Święta, co Jasnej bronisz Częstochowy
+I w Ostrej świecisz Bramie! Ty, co gród zamkowy
+Nowogródzki ochraniasz z jego wiernym ludem!`;
 
-    nav a:hover {
-      transform: scale(1.1);
-      background-color: rgba(0, 255, 170, 0.2);
+      inwokacja = new SpeechSynthesisUtterance(tekst);
+      inwokacja.lang = "pl-PL"; 
+      window.speechSynthesis.speak(inwokacja);
     }
 
-    /* Efekt tła dla każdej sekcji */
-    section {
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 15px;
-      padding: 2rem;
-      margin: 2rem 0;
-      box-shadow: 0 0 20px #00ffaa;
-    }
-
-    /* Efekty na przyciskach */
-    .glowing-button:active {
-      background-color: #004d40;
-      color: #00ffaa;
-    }
-
-    /* Animacja wideo tła */
-    video.background-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -2;
-      opacity: 0.1;
-    }
-
-    /* Przewijanie elementów */
-    .scrollable-section {
-      max-height: 300px;
-      overflow-y: auto;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00ffaa;
-    }
-
-    .scrollable-section::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .scrollable-section::-webkit-scrollbar-thumb {
-      background: #00ffaa;
-      border-radius: 10px;
-    }
-
-    .scrollable-section::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.4);
-    }
-
-    /* Tła interakcji */
-    .interaction-container {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .interaction-container::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 255, 170, 0.2);
-      animation: glowPulse 3s infinite ease-in-out;
-    }
-
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 0.7; }
-    }
-
-    /* Styl dla formularza feedback */
-    .feedback-form {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #00ffaa;
-    }
-
-    .feedback-form input,
-    .feedback-form textarea {
-      background: rgba(0, 0, 0, 0.4);
-      color: #00ffaa;
-      border: 1px solid #00ffaa;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 5px;
-      width: 100%;
-    }
-
-    .feedback-form button {
-      background: #00ffaa;
-      color: #000b1e;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .feedback-form button:hover {
-      background-color: #004d40;
-    }
-  </style>
-
-  <main>
-    <section>
-      <h2>Feedback i sugestie</h2>
-      <form class="feedback-form">
-        <input type="text" placeholder="Imię" required />
-        <textarea placeholder="Twoje uwagi..." required></textarea>
-        <button type="submit">Wyślij</button>
-      </form>
-    </section>
-
-    <section class="interaction-container">
-      <h2>Współpraca z AI</h2>
-      <div class="scrollable-section">
-        <p>AI zmienia nasze życie na wiele sposobów. Czy to w medycynie, edukacji, czy rozrywce, AI ma potencjał, by uprościć nasze codzienne zadania, ale również stawia przed nami wyzwania etyczne i moralne.</p>
-        <p>Odpowiedzialne wdrożenie sztucznej inteligencji to klucz do minimalizacji ryzyka i zapewnienia, że będzie ona działać na korzyść ludzkości.</p>
-      </div>
-    </section>
-
-    <section class="interaction-container">
-      <h2>Przyszłość AI</h2>
-      <div class="scrollable-section">
-        <p>Za kilka lat sztuczna inteligencja będzie w stanie podejmować decyzje autonomiczne w niemal każdej dziedzinie życia. Warto już teraz myśleć o tym, jakie regulacje i mechanizmy kontroli powinny być wprowadzone, aby zapewnić bezpieczeństwo ludziom i społeczeństwu.</p>
-        <p>Wspólna praca nad etycznymi standardami dla AI oraz nad technologiami pozwalającymi na kontrolowanie i monitorowanie działań AI to kluczowe wyzwanie przyszłości.</p>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>© 2025 Piotr. Projekt oparty na bezpieczeństwie AI. Zrealizowane z pasją i technologią.</p>
-  </footer>
-
-  <script>
-    // Funkcje umożliwiające tryb ciemny/jasny
-    function toggleMode() {
-      document.body.classList.toggle('light');
-    }
-
-    // Obsługa formularza feedback
-    document.querySelector('.feedback-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      alert('Dziękujemy za Twoje sugestie!');
-    });
-
-    // Animacja efektu tła
-    const starsContainer = document.querySelector('body');
-    function generateStars() {
-      for (let i = 0; i < 30; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        star.style.top = `${Math.random() * 100}vh`;
-        star.style.left = `${Math.random() * 100}vw`;
-        star.style.animationDuration = `${Math.random() * 2 + 1}s`;
-        starsContainer.appendChild(star);
+    function stopInwokacja() {
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
       }
     }
-    generateStars();
-  </script>
-</html><style>
-    /* Tło dla przycisków */
-    .button-background {
-      background: linear-gradient(135deg, rgba(0, 255, 170, 0.6), rgba(0, 170, 255, 0.6));
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 255, 170, 0.6);
-      padding: 1rem;
-      transition: transform 0.3s ease-in-out, background 0.3s ease;
-    }
 
-    .button-background:hover {
-      background: linear-gradient(135deg, rgba(0, 255, 170, 0.8), rgba(0, 170, 255, 0.8));
-      transform: scale(1.05);
-    }
-
-    /* Podświetlenie elementów nawigacyjnych */
-    nav a.active {
-      background-color: #004d40;
-      color: #00ffaa;
-      box-shadow: 0 0 15px #00ffaa;
-    }
-
-    /* Strefa interakcji z AI */
-    .ai-interaction-container {
-      padding: 2rem;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-      box-shadow: 0 0 20px #00ffaa;
-    }
-
-    .ai-interaction-container h3 {
-      font-size: 1.5rem;
-      color: #00ffaa;
-      margin-bottom: 1rem;
-    }
-
-    .ai-chatbox {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .ai-chatbox textarea {
-      padding: 1rem;
-      border: none;
-      border-radius: 5px;
-      resize: none;
-      height: 100px;
-      background: rgba(0, 0, 0, 0.5);
-      color: #00ffaa;
-      box-shadow: 0 0 10px #00ffaa;
-    }
-
-    .ai-chatbox button {
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 10px;
-      background: #00ffaa;
-      color: #000b1e;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ffaa;
-      transition: background 0.3s;
-    }
-
-    .ai-chatbox button:hover {
-      background: #004d40;
-    }
-
-    .ai-response {
-      background: rgba(0, 255, 170, 0.2);
-      color: #00ffaa;
-      padding: 1rem;
-      border-radius: 5px;
-      box-shadow: 0 0 15px #00ffaa;
-    }
-  </style>
-
-  <main>
-    <section class="ai-interaction-container">
-      <h3>Interakcja z AI</h3>
-      <div class="ai-chatbox">
-        <textarea placeholder="Wpisz pytanie do AI..."></textarea>
-        <button id="ask-ai">Zadaj pytanie</button>
-        <div id="ai-response" class="ai-response" style="display:none;">
-          <p>Odpowiedź AI: </p>
-          <p id="response-text"></p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Rozmowa o przyszłości AI</h2>
-      <div class="scrollable-section">
-        <p>AI staje się integralną częścią naszej przyszłości. Kiedyś będzie mogła rozwiązywać najbardziej złożone problemy, ale może także wprowadzać zagrożenia, których nie przewidzimy. Dlatego tak ważne jest jej odpowiedzialne rozwijanie i regulowanie jej działań.</p>
-        <p>Naszym celem jest nie tylko zrozumienie AI, ale także zapewnienie, że będzie wykorzystywana w sposób, który będzie służył ludzkości, a nie jej zagrażał.</p>
-      </div>
-    </section>
-
-    <section>
-      <h2>Wnioski</h2>
-      <p>Bezpieczeństwo AI to temat, który wciąż wymaga wielu badań, testów i refleksji. Musimy dążyć do stworzenia regulacji, które będą chronić nas przed niekontrolowanymi działaniami sztucznej inteligencji. To odpowiedzialność nas wszystkich.</p>
-    </section>
-
-    <footer>
-      <p>© 2025 Piotr. Wszystkie prawa zastrzeżone. Projekt jest wynikiem zaawansowanego myślenia o bezpieczeństwie AI.</p>
-    </footer>
-  </main>
-
-  <script>
-    // Funkcja do zadawania pytań do AI
-    document.getElementById('ask-ai').addEventListener('click', function() {
-      const userInput = document.querySelector('textarea').value;
-      const aiResponse = document.getElementById('ai-response');
-      const responseText = document.getElementById('response-text');
-
-      if (userInput) {
-        responseText.textContent = "AI odpowiada: Przetwarzam Twoje pytanie...";
-        aiResponse.style.display = "block";
-        
-        setTimeout(() => {
-          // Symulowana odpowiedź AI
-          responseText.textContent = "AI odpowiada: To jest przykładowa odpowiedź na Twoje pytanie o AI!";
-        }, 2000);
-      } else {
-        alert("Wpisz pytanie do AI!");
+    // Skrypt do generowania iskier
+    document.body.addEventListener('click', (event) => {
+      for (let i = 0; i < 5; i++) {
+        createSparkle(event.pageX, event.pageY);
       }
     });
-  </script>
-</html>
+
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('
