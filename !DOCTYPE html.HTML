@@ -1,271 +1,218 @@
-<!DOCTYPE html><html lang="pl">
+<!DOCTYPE html>
+<html lang="pl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI: Bezpieczna czy nie?</title>
+  <title>Bezpieczeństwo AI</title>
   <style>
-    :root {
-      --bg-color: #0b0f10;
-      --text-color: #f0f0f0;
-      --accent: #00ffe7;
-      --card-bg: #14191c;
-      --highlight: #ff007a;
-      --sparkle-color: #00ffe7;
-    }body.light {
-  --bg-color: #f0f0f0;
-  --text-color: #111;
-  --accent: #007777;
-  --card-bg: #ffffff;
-  --highlight: #ff7700;
-  --sparkle-color: #007777;
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  overflow-x: hidden;
-  transition: all 0.3s ease;
-  animation: fadeIn 1s ease-out;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-header {
-  text-align: center;
-  padding: 40px 20px;
-  animation: slideDown 1s ease-in-out;
-}
-
-@keyframes slideDown {
-  0% { transform: translateY(-50px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-h1 {
-  font-size: 3.5em;
-  color: var(--accent);
-  transition: transform 0.5s ease;
-  letter-spacing: 2px;
-}
-
-h1:hover {
-  transform: scale(1.1);
-}
-
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-}
-
-nav a {
-  color: var(--accent);
-  padding: 10px 16px;
-  border: 2px solid var(--accent);
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-nav a:hover {
-  background-color: var(--accent);
-  color: var(--bg-color);
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  animation: slideUp 1s ease-in-out;
-}
-
-@keyframes slideUp {
-  0% { transform: translateY(50px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-.card {
-  background-color: var(--card-bg);
-  padding: 20px;
-  border-left: 5px solid var(--accent);
-  border-radius: 12px;
-  box-shadow: 0 0 15px #0005;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.card:hover {
-  transform: translateY(-5px) scale(1.03);
-}
-
-button {
-  background-color: var(--accent);
-  color: var(--bg-color);
-  border: none;
-  padding: 12px 18px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: bold;
-  margin: 10px;
-  transition: 0.3s;
-}
-
-button:hover {
-  background-color: var(--highlight);
-}
-
-footer {
-  text-align: center;
-  padding: 25px;
-  color: gray;
-}
-
-.fullscreen-modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.95);
-  z-index: 1000;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.fullscreen-modal.active {
-  display: flex;
-}
-
-.modal-content {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 90%;
-  max-height: 85%;
-  overflow: auto;
-  color: #000;
-}
-
-.sparkle {
-  position: absolute;
-  border-radius: 50%;
-  background-color: var(--sparkle-color);
-  animation: sparkle 1s ease-out;
-  pointer-events: none;
-}
-
-@keyframes sparkle {
-  0% { transform: scale(0); opacity: 1; }
-  50% { transform: scale(2); opacity: 0.9; }
-  100% { transform: scale(0); opacity: 0; }
-}
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #000b1e, #001a2e);
+      color: #00ffaa;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      height: 100%; width: 100%;
+      background: radial-gradient(ellipse at center, rgba(0,255,170,0.1) 0%, transparent 70%);
+      animation: pulseGlow 5s infinite ease-in-out;
+      z-index: -1;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.05); }
+    }
+    header {
+      padding: 2rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 10px #00ffaa;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #00ffaa;
+      text-shadow: 0 0 10px #00ffaa;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    nav a {
+      text-decoration: none;
+      color: #00ffaa;
+      padding: 0.5rem 1rem;
+      border: 1px solid #00ffaa;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: #00ffaa;
+      color: #000b1e;
+    }
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+    .fullscreen-module {
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .fullscreen-module:hover {
+      transform: scale(1.05);
+    }
+    .fullscreen-active {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000b1e;
+      color: #00ffaa;
+      padding: 2rem;
+      z-index: 999;
+      overflow: auto;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      border-top: 1px solid #00ffaa;
+    }
+    @keyframes clickFeedback {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+    .clickable:active {
+      animation: clickFeedback 0.2s;
+    }
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
-    <button onclick="toggleMode()">Tryb Jasny/Ciemny</button>
-    <button onclick="startInwokacja()">Inwokacja: Pan Tadeusz</button>
-    <button onclick="stopInwokacja()">Zatrzymaj Inwokację</button>
-  </header>  <nav>
-    <a href="https://openai.com/safety" target="_blank" onclick="playClick()">OpenAI Safety</a>
-    <a href="https://futureoflife.org" target="_blank" onclick="playClick()">Future of Life</a>
-    <a href="https://alignmentforum.org" target="_blank" onclick="playClick()">AI Alignment</a>
-  </nav>  <div class="container">
-    <div class="card" onclick="openModal('Dlaczego bezpieczeństwo AI jest ważne?', 'Sztuczna inteligencja może podejmować decyzje wpływające na miliony ludzi...')">
-      <h3>🔒 Dlaczego bezpieczeństwo AI jest ważne?</h3>
-    </div>
-    <div class="card" onclick="openModal('Zagrożenia związane z AI', 'Nieodpowiednio nadzorowane AI może być wykorzystane do...')">
-      <h3>⚠️ Zagrożenia związane z AI</h3>
-    </div>
-    <div class="card" onclick="openModal('Jak można uczynić AI bezpieczną?', 'Potrzebne są regulacje, przejrzystość algorytmów...')">
-      <h3>✅ Jak uczynić AI bezpieczną?</h3>
-    </div>
-    <div class="card" onclick="openModal('Etyka i AI', 'Etyka w sztucznej inteligencji koncentruje się na...')">
-      <h3>⚖️ Etyka i AI</h3>
-    </div>
-    <div class="card" onclick="openModal('Zaufanie do AI', 'Zaufanie do systemów AI można budować poprzez...')">
-      <h3>🤝 Zaufanie do AI</h3>
-    </div>
-    <div class="card" onclick="openModal('AI w medycynie', 'AI w medycynie może pomóc w diagnozowaniu chorób...')">
-      <h3>💉 AI w medycynie</h3>
-    </div>
-  </div>  <footer>
-    &copy; 2025 Piotr i jego futurystyczna superstrona.
-  </footer><audio id="clickSound" src="pup.mp3" preload="auto"></audio>
+<canvas id="particles"></canvas>
 
-  <div id="fullscreenModal" class="fullscreen-modal">
-    <div class="modal-content">
-      <h3 id="modalTitle"></h3>
-      <p id="modalContent"></p>
-      <button onclick="closeModal()">Zamknij</button>
-    </div>
-  </div>  <script>
-    function toggleMode() {
-      document.body.classList.toggle("light");
-    }
+<header>
+  <h1>Bezpieczeństwo Sztucznej Inteligencji</h1>
+</header>
 
-    function playClick() {
-      document.getElementById("clickSound").play();
-    }
+<nav>
+  <a href="#wprowadzenie" class="clickable">Wprowadzenie</a>
+  <a href="#zagrozenia" class="clickable">Zagrożenia</a>
+  <a href="#przyszlosc" class="clickable">Przyszłość</a>
+</nav>
 
-    function openModal(title, content) {
-      document.getElementById("modalTitle").innerText = title;
-      document.getElementById("modalContent").innerText = content;
-      document.getElementById("fullscreenModal").classList.add("active");
-      playClick();
-    }
+<main>
+  <section id="wprowadzenie" class="fullscreen-module">
+    <h2>Wprowadzenie</h2>
+    <p>Sztuczna inteligencja rozwija się w zawrotnym tempie. Od prostych algorytmów po zaawansowane modele językowe – AI zaczyna mieć realny wpływ na nasze życie codzienne.</p>
+  </section>
 
-    function closeModal() {
-      document.getElementById("fullscreenModal").classList.remove("active");
-    }
+  <section id="zagrozenia" class="fullscreen-module">
+    <h2>Potencjalne zagrożenia</h2>
+    <p>Wraz z rozwojem AI pojawiają się pytania o bezpieczeństwo. Czy maszyny mogą wymknąć się spod kontroli? Jak zapobiegać uprzedzeniom w danych? Kto ponosi odpowiedzialność za decyzje AI?</p>
+  </section>
 
-    let inwokacja;
+  <section id="przyszlosc" class="fullscreen-module">
+    <h2>Przyszłość AI</h2>
+    <p>W najbliższych latach AI może zmienić rynek pracy, edukację, a nawet sposób, w jaki myślimy. Ważne jest, by rozwijać ją z myślą o wartościach etycznych i dobru społecznym.</p>
+  </section>
+</main>
 
-    function startInwokacja() {
-      stopInwokacja();
-      const tekst = `Litwo! Ojczyzno moja! ty jesteś jak zdrowie;...`;
-      inwokacja = new SpeechSynthesisUtterance(tekst);
-      inwokacja.lang = "pl-PL";
-      window.speechSynthesis.speak(inwokacja);
-    }
+<footer>
+  &copy; 2025 Piotr AI Project – Futurystyczna Strona
+</footer>
 
-    function stopInwokacja() {
-      if (window.speechSynthesis.speaking) {
-        window.speechSynthesis.cancel();
-      }
-    }
-
-    document.body.addEventListener('click', (event) => {
-      for (let i = 0; i < 7; i++) {
-        createSparkle(event.pageX, event.pageY);
-      }
+<script>
+  const modules = document.querySelectorAll('.fullscreen-module');
+  modules.forEach(module => {
+    module.addEventListener('click', () => {
+      module.classList.toggle('fullscreen-active');
     });
+  });
 
-    function createSparkle(x, y) {
-      const sparkle = document.createElement('div');
-      sparkle.classList.add('sparkle');
-      sparkle.style.left = `${x - 15}px`;
-      sparkle.style.top = `${y - 15}px`;
-      sparkle.style.width = `${Math.random() * 25 + 20}px`;
-      sparkle.style.height = sparkle.style.width;
-      sparkle.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
-      document.body.appendChild(sparkle);
+  const clickSound = new Audio("https://www.myinstants.com/media/sounds/button-click.mp3");
+  document.querySelectorAll('.clickable').forEach(el => {
+    el.addEventListener('click', () => {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    });
+  });
 
-      setTimeout(() => {
-        sparkle.remove();
-      }, 1000);
-    }
-  </script></body>
+  const speak = (text) => {
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'pl-PL';
+    speechSynthesis.speak(utter);
+  };
+  modules.forEach(module => {
+    module.addEventListener('click', () => {
+      const heading = module.querySelector('h2').innerText;
+      speak(`Sekcja: ${heading}`);
+    });
+  });
+
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function createParticle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    };
+  }
+
+  for (let i = 0; i < 100; i++) {
+    particles.push(createParticle());
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#00ffaa";
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+</script>
+</body>
 </html>
