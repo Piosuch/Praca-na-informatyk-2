@@ -10,9 +10,6 @@
       --text-color: #fff;
       --accent: #00ffaa;
       --card-bg: #1a1a1a;
-      --border-radius: 10px;
-      --box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      --hover-color: #ffaa00;
     }
 
     body.light {
@@ -38,7 +35,7 @@
 
     header {
       text-align: center;
-      padding: 40px;
+      padding: 30px;
       animation: slideDown 1s ease-in-out;
     }
 
@@ -69,15 +66,13 @@
       font-weight: bold;
       padding: 8px 12px;
       border: 2px solid var(--accent);
-      border-radius: var(--border-radius);
+      border-radius: 10px;
       transition: 0.3s;
-      display: inline-block;
     }
 
     nav a:hover {
       background-color: var(--accent);
       color: var(--bg-color);
-      transform: translateY(-2px);
     }
 
     .container {
@@ -96,40 +91,37 @@
       background-color: var(--card-bg);
       padding: 20px;
       border-left: 5px solid var(--accent);
-      border-radius: var(--border-radius);
+      border-radius: 10px;
       margin-bottom: 20px;
-      box-shadow: var(--box-shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px #0003;
+      transition: transform 0.3s ease;
       cursor: pointer;
     }
 
     .card:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px var(--accent);
     }
 
     button {
       background-color: var(--accent);
       color: var(--bg-color);
       border: none;
-      padding: 12px 18px;
-      border-radius: var(--border-radius);
+      padding: 10px 15px;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
       margin: 10px;
-      transition: background-color 0.3s, transform 0.2s ease;
+      transition: background-color 0.3s;
     }
 
     button:hover {
-      background-color: var(--hover-color);
-      transform: scale(1.1);
+      background-color: #ffaa00;
     }
 
     footer {
       text-align: center;
       padding: 20px;
       color: gray;
-      font-size: 0.9em;
     }
 
     .fullscreen-modal {
@@ -144,12 +136,6 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
-      animation: modalFadeIn 0.5s ease;
-    }
-
-    @keyframes modalFadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
     }
 
     .fullscreen-modal.active {
@@ -159,12 +145,11 @@
     .modal-content {
       background-color: white;
       padding: 30px;
-      border-radius: var(--border-radius);
+      border-radius: 10px;
       max-width: 80%;
       overflow: auto;
       max-height: 80%;
       color: #111;
-      text-align: center;
     }
 
     /* Iskry */
@@ -223,7 +208,7 @@
     &copy; 2025 Piotr i jego superstrona z Notatnika.
   </footer>
 
-  <audio id="clickSound" src="pup.mp3" preload="auto"></audio>
+  <audio id="clickSound" src="pup.mp3" preload="auto"></audio> <!-- Nowy plik dźwiękowy -->
 
   <div id="fullscreenModal" class="fullscreen-modal">
     <div class="modal-content">
@@ -266,7 +251,7 @@ I w Ostrej świecisz Bramie! Ty, co gród zamkowy
 Nowogródzki ochraniasz z jego wiernym ludem!`;
 
       inwokacja = new SpeechSynthesisUtterance(tekst);
-      inwokacja.lang = "pl-PL"; 
+      inwokacja.lang = "pl-PL"; // Ustawienie języka na polski
       window.speechSynthesis.speak(inwokacja);
     }
 
@@ -285,4 +270,19 @@ Nowogródzki ochraniasz z jego wiernym ludem!`;
 
     function createSparkle(x, y) {
       const sparkle = document.createElement('div');
-      sparkle.classList.add('
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = `${x - 10}px`;
+      sparkle.style.top = `${y - 10}px`;
+      sparkle.style.width = `${Math.random() * 20 + 15}px`; // Losowy rozmiar iskry
+      sparkle.style.height = sparkle.style.width;
+      sparkle.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
+      document.body.appendChild(sparkle);
+
+      // Usuwanie iskry po jej animacji
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
